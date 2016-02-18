@@ -34,7 +34,6 @@ import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
 
 
-
 public class AddBook extends Fragment implements
   LoaderManager.LoaderCallbacks<Cursor>,
   SharedPreferences.OnSharedPreferenceChangeListener {
@@ -70,7 +69,8 @@ public class AddBook extends Fragment implements
     if (requestCode == BARCODE_CAPTURE) {
       if (resultCode == CommonStatusCodes.SUCCESS) {
         if (data != null) {
-          Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+          Barcode barcode =
+            data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
           Log.d(LOG_TAG, "Barcode read: " + barcode.displayValue);
           mEan.setText(barcode.displayValue);
           downloadBook(barcode.displayValue);
@@ -89,7 +89,8 @@ public class AddBook extends Fragment implements
   }
 
   @Override
-  public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+  public android.support.v4.content.Loader<Cursor> onCreateLoader(int id,
+                                                                  Bundle args) {
     Log.d(LOG_TAG, "onCreateLoader");
     if (mEan.getText().length() == 0) {
       return null;
@@ -164,26 +165,30 @@ public class AddBook extends Fragment implements
   }
 
   @Override
-  public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
+  public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader,
+                             Cursor data) {
 
     Log.d(LOG_TAG, "onLoadFinished");
     if (!data.moveToFirst()) {
       return;
     }
 
-    String bookTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
+    String bookTitle =
+      data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
     mBookTitle.setText(bookTitle);
 
-    String bookSubTitle =
-      data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
+    String bookSubTitle = data.getString(
+      data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
     mBookSubTitle.setText(bookSubTitle);
 
-    String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
+    String authors = data.getString(
+      data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
     String[] authorsArr = authors.split(",");
     mAuthors.setLines(authorsArr.length);
     mAuthors.setText(authors.replace(",", "\n"));
 
-    String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
+    String imgUrl = data.getString(
+      data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
 
     Picasso.with(getContext())
       .load(imgUrl)
@@ -191,8 +196,8 @@ public class AddBook extends Fragment implements
       .into(mBookCover);
     mBookCover.setVisibility(View.VISIBLE);
 
-    String categories =
-      data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
+    String categories = data.getString(
+        data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
     mCategories.setText(categories);
 
     mSave.setVisibility(View.VISIBLE);

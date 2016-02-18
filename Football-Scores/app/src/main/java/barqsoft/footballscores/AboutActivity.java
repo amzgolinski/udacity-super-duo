@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 
 public class AboutActivity extends ActionBarActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_about);
+    if (savedInstanceState == null) {
+      getSupportFragmentManager().beginTransaction()
+        .add(R.id.container, new AboutFragment())
+        .commit();
     }
+  }
 
 /*
     @Override
@@ -45,18 +45,16 @@ public class AboutActivity extends ActionBarActivity {
     }
     */
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
+  public static class AboutFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_about, container, false);
-        }
+    public AboutFragment() {
+      // empty
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+      return inflater.inflate(R.layout.fragment_about, container, false);
+    }
+  }
 }

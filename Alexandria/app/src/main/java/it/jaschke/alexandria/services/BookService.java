@@ -33,8 +33,10 @@ public class BookService extends IntentService {
 
   private final String LOG_TAG = BookService.class.getSimpleName();
 
-  public static final String FETCH_BOOK  = "it.jaschke.alexandria.services.action.FETCH_BOOK";
-  public static final String DELETE_BOOK = "it.jaschke.alexandria.services.action.DELETE_BOOK";
+  public static final String FETCH_BOOK
+    = "it.jaschke.alexandria.services.action.FETCH_BOOK";
+  public static final String DELETE_BOOK
+    = "it.jaschke.alexandria.services.action.DELETE_BOOK";
 
   public static final String EAN = "it.jaschke.alexandria.services.extra.EAN";
   public static final String APP_NAME = "Alexandria";
@@ -111,7 +113,8 @@ public class BookService extends IntentService {
 
     try {
 
-      final String FORECAST_BASE_URL = "https://www.googleapis.com/books/v1/volumes?";
+      final String FORECAST_BASE_URL
+        = "https://www.googleapis.com/books/v1/volumes?";
       final String QUERY_PARAM = "q";
 
       final String ISBN_PARAM = "isbn:" + ean;
@@ -253,13 +256,15 @@ public class BookService extends IntentService {
 
   private void setServerStatus(@ServerStatus int status) {
     Log.d(LOG_TAG, "setServerStatus");
-    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    SharedPreferences sharedPref =
+      PreferenceManager.getDefaultSharedPreferences(this);
     SharedPreferences.Editor editor = sharedPref.edit();
     editor.putInt(getString(R.string.server_status_key), status);
     editor.commit();
   }
 
-  private void writeBackAuthors(String ean, JSONArray jsonArray) throws JSONException {
+  private void writeBackAuthors(String ean, JSONArray jsonArray)
+    throws JSONException {
     ContentValues values = new ContentValues();
     for (int i = 0; i < jsonArray.length(); i++) {
       values.put(AlexandriaContract.AuthorEntry._ID, ean);
@@ -269,8 +274,8 @@ public class BookService extends IntentService {
     }
   }
 
-  private void writeBackBook(String ean, String title, String subtitle, String desc,
-                             String imgUrl) {
+  private void writeBackBook(String ean, String title, String subtitle,
+                             String desc, String imgUrl) {
     Log.d(LOG_TAG, "Adding book " + ean);
     ContentValues values = new ContentValues();
     values.put(AlexandriaContract.BookEntry._ID, ean);
@@ -281,7 +286,8 @@ public class BookService extends IntentService {
     getContentResolver().insert(AlexandriaContract.BookEntry.CONTENT_URI, values);
   }
 
-  private void writeBackCategories(String ean, JSONArray jsonArray) throws JSONException {
+  private void writeBackCategories(String ean, JSONArray jsonArray)
+    throws JSONException {
     ContentValues values = new ContentValues();
     for (int i = 0; i < jsonArray.length(); i++) {
       values.put(AlexandriaContract.CategoryEntry._ID, ean);
