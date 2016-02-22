@@ -1,10 +1,26 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="list_horizonal_matgin">2dp</dimen>
-    <dimen name="share_button_margin">150dp</dimen>
-    <dimen name="TeamNames">17sp</dimen>
-    <dimen name="Score">30sp</dimen>
-    <dimen name="League">15sp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="list_horizonal_margin">2dp</dimen>
+  <dimen name="share_button_margin">150dp</dimen>
+  <dimen name="team_name_size">17sp</dimen>
+  <dimen name="score_size">30sp</dimen>
+  <dimen name="league_name_size">15sp</dimen>
+
+
+  <dimen name="pager_padding">4dp</dimen>
+
+  <!-- 4 x 2 collections widget -->
+  <dimen name="widget_scores_default_width">250dp</dimen>
+  <dimen name="widget_scores_default_height">110dp</dimen>
+  <dimen name="widget_scores_min_resize_width">220dp</dimen>
+  <dimen name="widget_scores_min_resize_height">
+    @dimen/widget_scores_default_height
+  </dimen>
+
+  <dimen name="widget_margin">4dp</dimen>
+  <dimen name="widget_item_margin">8dp</dimen>
+  <dimen name="widget_padding">8dp</dimen>
+
 </resources>

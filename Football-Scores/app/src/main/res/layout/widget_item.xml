@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/widget_item_margin"
+              android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/scores_widget_league"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:textAppearance="@style/TextAppearance.AppCompat.Title"
+      android:textColor="@color/widget_text_primary"
+      tools:text="Champions League" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/scores_widget_home_team"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/widget_text_primary"
+        tools:text="Tottenham Hotspurs" />
+
+    <TextView
+        android:id="@+id/scores_widget_score"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/widget_text_primary"
+        tools:text="6 - 1" />
+
+
+    <TextView
+        android:id="@+id/scores_widget_away_team"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/widget_text_primary"
+        tools:text="Manchester United" />
+
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/scores_widget_matchday"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:textSize="16dp"
+      android:textColor="@color/widget_text_secondary"
+      tools:text="Match day: 2" />
+
+
+</LinearLayout>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import barqsoft.footballscores.data.ScoresContract;
 import barqsoft.footballscores.data.ScoresContract.ScoresTable;
 
 
@@ -20,25 +19,25 @@ public class ScoresDBHelper extends SQLiteOpenHelper {
   @Override
   public void onCreate(SQLiteDatabase db) {
     final String CreateScoresTable = "CREATE TABLE " +
-      ScoresContract.SCORES_TABLE + " ("
-      + ScoresTable._ID + " INTEGER PRIMARY KEY,"
-      + ScoresTable.DATE_COL + " TEXT NOT NULL,"
-      + ScoresTable.TIME_COL + " INTEGER NOT NULL,"
-      + ScoresTable.HOME_COL + " TEXT NOT NULL,"
-      + ScoresTable.AWAY_COL + " TEXT NOT NULL,"
-      + ScoresTable.LEAGUE_COL + " INTEGER NOT NULL,"
-      + ScoresTable.HOME_GOALS_COL + " TEXT NOT NULL,"
-      + ScoresTable.AWAY_GOALS_COL + " TEXT NOT NULL,"
-      + ScoresTable.MATCH_ID + " INTEGER NOT NULL,"
-      + ScoresTable.MATCH_DAY + " INTEGER NOT NULL,"
-      + " UNIQUE (" + ScoresTable.MATCH_ID + ") ON CONFLICT REPLACE"
-      + " );";
+      ScoresTable.TABLE_NAME + " (" +
+      ScoresTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+      ScoresTable.COLUMN_LEAGUE + " INTEGER NOT NULL," +
+      ScoresTable.COLUMN_MATCH_ID + " INTEGER NOT NULL," +
+      ScoresTable.COLUMN_MATCH_DAY + " INTEGER NOT NULL," +
+      ScoresTable.COLUMN_DATE + " TEXT NOT NULL," +
+      ScoresTable.COLUMN_TIME + " INTEGER NOT NULL," +
+      ScoresTable.COLUMN_HOME + " TEXT NOT NULL," +
+      ScoresTable.COLUMN_HOME_GOALS + " TEXT NOT NULL," +
+      ScoresTable.COLUMN_AWAY + " TEXT NOT NULL," +
+      ScoresTable.COLUMN_AWAY_GOALS + " TEXT NOT NULL," +
+
+      " UNIQUE (" + ScoresTable.COLUMN_MATCH_ID + ") ON CONFLICT REPLACE );";
     db.execSQL(CreateScoresTable);
   }
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     //Remove old values when upgrading.
-    db.execSQL("DROP TABLE IF EXISTS " + ScoresContract.SCORES_TABLE);
+    db.execSQL("DROP TABLE IF EXISTS " + ScoresTable.TABLE_NAME);
   }
 }

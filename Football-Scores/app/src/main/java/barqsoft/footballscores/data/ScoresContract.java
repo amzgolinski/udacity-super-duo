@@ -12,24 +12,24 @@ public class ScoresContract {
   public static Uri BASE_CONTENT_URI =
     Uri.parse("content://" + CONTENT_AUTHORITY);
 
-  public static final String SCORES_TABLE = "scores_table";
   public static final String PATH_SCORES = "scores";
 
-
   public static final class ScoresTable implements BaseColumns {
-    //Table data
-    public static final String LEAGUE_COL = "league";
-    public static final String DATE_COL = "date";
-    public static final String TIME_COL = "time";
-    public static final String HOME_COL = "home";
-    public static final String AWAY_COL = "away";
-    public static final String HOME_GOALS_COL = "home_goals";
-    public static final String AWAY_GOALS_COL = "away_goals";
-    public static final String MATCH_ID = "match_id";
-    public static final String MATCH_DAY = "match_day";
 
-    //public static Uri SCORES_CONTENT_URI =
-    // BASE_CONTENT_URI.buildUpon().appendPath(PATH).build();
+    public static final Uri CONTENT_URI =
+        BASE_CONTENT_URI.buildUpon().appendPath(PATH_SCORES).build();
+
+    public static final String TABLE_NAME = "scores_table";
+
+    public static final String COLUMN_LEAGUE = "league";
+    public static final String COLUMN_MATCH_ID = "match_id";
+    public static final String COLUMN_MATCH_DAY = "match_day";
+    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_TIME = "time";
+    public static final String COLUMN_HOME = "home";
+    public static final String COLUMN_AWAY = "away";
+    public static final String COLUMN_HOME_GOALS = "home_goals";
+    public static final String COLUMN_AWAY_GOALS = "away_goals";
 
     //Types
     public static final String CONTENT_TYPE =
@@ -41,15 +41,15 @@ public class ScoresContract {
         CONTENT_AUTHORITY + "/" + PATH_SCORES;
 
     public static Uri buildScoreWithLeague() {
-      return BASE_CONTENT_URI.buildUpon().appendPath("league").build();
+      return CONTENT_URI.buildUpon().appendPath("league").build();
     }
 
     public static Uri buildScoreWithId() {
-      return BASE_CONTENT_URI.buildUpon().appendPath("id").build();
+      return CONTENT_URI.buildUpon().appendPath("id").build();
     }
 
     public static Uri buildScoreWithDate() {
-      return BASE_CONTENT_URI.buildUpon().appendPath("date").build();
+      return CONTENT_URI.buildUpon().appendPath("date").build();
     }
   }
 

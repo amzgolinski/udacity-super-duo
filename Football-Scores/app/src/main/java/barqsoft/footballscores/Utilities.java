@@ -1,52 +1,65 @@
 package barqsoft.footballscores;
 
 public class Utilities {
-  public static final int SERIE_A = 357;
-  public static final int PREMIER_LEGAUE = 354;
-  public static final int CHAMPIONS_LEAGUE = 362;
-  public static final int PRIMERA_DIVISION = 358;
-  public static final int BUNDESLIGA = 351;
 
-  public static String getLeague(int league_num) {
-    switch (league_num) {
-      case SERIE_A:
+  public interface Leagues {
+
+    int BUNDESLIGA1 = 394;
+    int BUNDESLIGA2 = 395;
+    int LIGUE1 = 396;
+    int LIGUE2 = 397;
+    int PREMIER_LEAGUE = 398;
+    int PRIMERA_DIVISION = 399;
+    int SEGUNDA_DIVISION = 400;
+    int SERIE_A = 401;
+    int PRIMERA_LIGA = 402;
+    int BUNDESLIGA3 = 403;
+    int EREDIVISIE = 404;
+    int CHAMPS_LEAGUE = 405;
+  }
+
+  public static String getLeague(int leagueNum) {
+    switch (leagueNum) {
+      case Leagues.SERIE_A:
         return "Seria A";
-      case PREMIER_LEGAUE:
+      case Leagues.PREMIER_LEAGUE:
         return "Premier League";
-      case CHAMPIONS_LEAGUE:
+      case Leagues.CHAMPS_LEAGUE:
         return "UEFA Champions League";
-      case PRIMERA_DIVISION:
+      case Leagues.PRIMERA_DIVISION:
         return "Primera Division";
-      case BUNDESLIGA:
+      case Leagues.BUNDESLIGA1:
         return "Bundesliga";
+      case Leagues.EREDIVISIE:
+        return "Eredivisie";
       default:
-        return "Not known League Please report";
+        return "League not listed";
     }
   }
 
-  public static String getMatchDay(int match_day, int league_num) {
-    if (league_num == CHAMPIONS_LEAGUE) {
-      if (match_day <= 6) {
+  public static String getMatchDay(int matchDay, int leagueNum) {
+    if (leagueNum == Leagues.CHAMPS_LEAGUE) {
+      if (matchDay <= 6) {
         return "Group Stages, Matchday : 6";
-      } else if (match_day == 7 || match_day == 8) {
+      } else if (matchDay == 7 || matchDay == 8) {
         return "First Knockout round";
-      } else if (match_day == 9 || match_day == 10) {
+      } else if (matchDay == 9 || matchDay == 10) {
         return "QuarterFinal";
-      } else if (match_day == 11 || match_day == 12) {
+      } else if (matchDay == 11 || matchDay == 12) {
         return "SemiFinal";
       } else {
         return "Final";
       }
     } else {
-      return "Matchday : " + String.valueOf(match_day);
+      return "Matchday : " + String.valueOf(matchDay);
     }
   }
 
-  public static String getScores(int home_goals, int awaygoals) {
-    if (home_goals < 0 || awaygoals < 0) {
+  public static String getScores(int homeGoals, int awayGoals) {
+    if (homeGoals < 0 || awayGoals < 0) {
       return " - ";
     } else {
-      return String.valueOf(home_goals) + " - " + String.valueOf(awaygoals);
+      return String.valueOf(homeGoals) + " - " + String.valueOf(awayGoals);
     }
   }
 
