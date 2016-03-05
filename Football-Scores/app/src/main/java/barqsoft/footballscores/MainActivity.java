@@ -12,11 +12,18 @@ public class MainActivity extends ActionBarActivity {
 
   public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
+  private static final String CURRENT_PAGE =
+      "barqsoft.footballscores.CURRENT_PAGE";
+
+  private static final String SELECTED_MATCH =
+      "barqsoft.footballscores.SELECTED_MATCH";
+
+  private static final String PAGER_FRAGMENT =
+      "barqsoft.footballscores.PAGER_FRAGMENT";
+
   public static int mSelectedMatchID;
   public static int mCurrentFragment = 2;
   private PagerFragment mMyMain;
-
-  private final String SAVE_TAG = "Save Test";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,25 +65,20 @@ public class MainActivity extends ActionBarActivity {
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     Log.v(LOG_TAG, "onSaveInstanceState");
-    Log.v(SAVE_TAG,
-      "fragment: " + String.valueOf(mMyMain.mPagerHandler.getCurrentItem()));
-    Log.v(SAVE_TAG, "selected id: " + mSelectedMatchID);
-    outState.putInt("Pager_Current", mMyMain.mPagerHandler.getCurrentItem());
-    outState.putInt("Selected_match", mSelectedMatchID);
-    getSupportFragmentManager().putFragment(outState, "my_main", mMyMain);
+    outState.putInt(CURRENT_PAGE, mMyMain.mPagerHandler.getCurrentItem());
+    outState.putInt(SELECTED_MATCH, mSelectedMatchID);
+    getSupportFragmentManager().putFragment(outState, PAGER_FRAGMENT, mMyMain);
     super.onSaveInstanceState(outState);
   }
 
   @Override
   protected void onRestoreInstanceState(Bundle savedInstanceState) {
     Log.v(LOG_TAG, "onRestoreInstanceState");
-    Log.v(SAVE_TAG,
-      "fragment: " + String.valueOf(savedInstanceState.getInt("Pager_Current")));
-    Log.v(SAVE_TAG,
-      "selected id: " + savedInstanceState.getInt("Selected_match"));
-    mCurrentFragment = savedInstanceState.getInt("Pager_Current");
-    mSelectedMatchID = savedInstanceState.getInt("Selected_match");
-    mMyMain = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState, "my_main");
+
+    mCurrentFragment = savedInstanceState.getInt(CURRENT_PAGE);
+    mSelectedMatchID = savedInstanceState.getInt(SELECTED_MATCH);
+    mMyMain = (PagerFragment) getSupportFragmentManager()
+        .getFragment(savedInstanceState, PAGER_FRAGMENT);
     super.onRestoreInstanceState(savedInstanceState);
   }
 }

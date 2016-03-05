@@ -2,7 +2,6 @@ package barqsoft.footballscores;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -27,6 +26,9 @@ public class MainScreenFragment extends Fragment
   // Constants
   public static final int SCORES_LOADER = 0;
 
+  public static final String SORT_ORDER =
+      "ORDER BY  " + ScoresContract.ScoresTable.COLUMN_LEAGUE + " ASC";
+
   public static final String[] SCORES_COLUMNS = {
       ScoresContract.ScoresTable._ID,
       ScoresContract.ScoresTable.COLUMN_LEAGUE,
@@ -40,7 +42,6 @@ public class MainScreenFragment extends Fragment
       ScoresContract.ScoresTable.COLUMN_AWAY_GOALS
   };
 
-  // these indices must match the projection
   public static final int INDEX_COLUMN_ID = 0;
   public static final int INDEX_COLUMN_LEAGUE = 1;
   public static final int INDEX_COLUMN_MATCH_ID = 2;
@@ -84,6 +85,7 @@ public class MainScreenFragment extends Fragment
     scoreList.setAdapter(mAdapter);
     getLoaderManager().initLoader(SCORES_LOADER, null, this);
     mAdapter.mDetailMatchID = MainActivity.mSelectedMatchID;
+
     scoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -107,23 +109,13 @@ public class MainScreenFragment extends Fragment
         SCORES_COLUMNS,
         null,
         mFragmentDate,
-        null
+        SORT_ORDER
     );
   }
 
   @Override
   public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
     Log.d(LOG_TAG, "onLoadFinished");
-    //Log.v(FetchScoreTask.LOG_TAG,"loader finished");
-    //cursor.moveToFirst();
-        /*
-        while (!cursor.isAfterLast())
-        {
-            Log.v(FetchScoreTask.LOG_TAG,cursor.getString(1));
-            cursor.moveToNext();
-        }
-        */
-
     int i = 0;
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
@@ -131,7 +123,6 @@ public class MainScreenFragment extends Fragment
       cursor.moveToNext();
     }
     mAdapter.swapCursor(cursor);
-    //mAdapter.notifyDataSetChanged();
   }
 
   @Override

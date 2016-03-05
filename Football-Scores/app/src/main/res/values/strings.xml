@@ -3,21 +3,12 @@
 
   <string name="app_name">Football Scores</string>
   <string name="action_settings">Settings</string>
-  <string name="test_text">Test</string>
+
+  <!-- Day name strings -->
   <string name="today">Today</string>
   <string name="yesterday">Yesterday</string>
   <string name="tomorrow">Tomorrow</string>
-  <string name="champions_league">UEFA Champions League</string>
-  <string name="bundesliga">Bundesliga</string>
-  <string name="premier_league">Premier League</string>
-  <string name="primeradivison">Primera Division</string>
-  <string name="seria_a">Serie A</string>
-  <string name="matchday_text">Match day</string>
-  <string name="group_stage_text">Group stages</string>
-  <string name="first_knockout_round">First knockout round</string>
-  <string name="quarter_final">Quarter Final</string>
-  <string name="semi_final">Semi Final</string>
-  <string name="final_text">Final</string>
+
   <string name="share_text">Share</string>
   <string name="about">About</string>
   <string name="title_activity_about">AboutActivity</string>
@@ -34,6 +25,7 @@
     During the off season, fake data will be added to the app.
   </string>
 
+  <string name="test_text">Test</string>
   <string name="widget_text">This is a widget probably.</string>
 
   <string name="api_key" translatable="false">
@@ -46,11 +38,83 @@
 
   <string name="scores_widget_title">Football Scores</string>
 
-  <string name="date_format_yyyy_MM_dd">
-    yyyy-MM-dd
-  </string>
+  <!-- Date format strings -->
+  <string name="date_format_yyyy_MM_dd" translatable="false">yyyy-MM-dd</string>
+  <string name="date_format_day" translatable="false">EEEE</string>
 
   <string name="match_day">Match: %1$s</string>
+
+  <!-- Champs League match day strings -->
+  <string name="champs_league_group_stages">
+    Group Stages, Matchday : 6
+  </string>
+  <string name="champs_league_first_knockout">First Knockout round</string>
+  <string name="champs_league_quarterfinal">QuarterFinal</string>
+  <string name="champs_league_semifinal">SemiFinal</string>
+  <string name="champs_league_final">Final</string>
+
+
+  <!-- League Names -->
+  <string name="league_name_bundesliga" translatable="false">
+    Bundesliga
+  </string>
+
+  <string name="league_name_champs_league" translatable="false">
+    UEFA Champions League
+  </string>
+
+  <string name="league_name_eredivisie" translatable="false">
+    Eredivisie
+  </string>
+
+  <string name="league_name_premier_league" translatable="false">
+    Premier League
+  </string>
+
+  <string name="league_name_primera_division" translatable="false">
+    Primera Division
+  </string>
+
+  <string name="league_name_seria_a" translatable="false">Seria A</string>
+  <string name="league_not_listed">League not listed</string>
+
+  <!-- Team Names -->
+  <string name="team_name_arsenal" translatable="false">
+    Arsenal London FC
+  </string>
+  <string name="team_name_everton" translatable="false">
+    Everton FC
+  </string>
+  <string name="team_name_leicester_city" translatable="false">
+    Leicester City
+  </string>
+  <string name="team_name_manchester_united" translatable="false">
+    Manchester United FC
+  </string>
+  <string name="team_name_tottenham" translatable="false">
+    Tottenham Hotspur FC
+  </string>
+  <string name="team_name_stoke_city" translatable="false">
+    Stoke City FC
+  </string>
+  <string name="team_name_sunderland" translatable="false">
+    Sunderland AFC
+  </string>
+  <string name="team_name_swansea" translatable="false">
+    Swansea City
+  </string>
+  <string name="team_name_west_bromwich" translatable="false">
+    West Bromwich Albion
+  </string>
+  <string name="team_name_west_ham" translatable="false">
+    West Ham United FC
+  </string>
+
+  <!-- content descriptions -->
+  <string name="share_button">Button to share score.</string>
+  <string name="home_team_crest">Home team crest.</string>
+  <string name="away_team_crest">Away team crest.</string>
+
 
   <string name="dummy_data" translatable="false">
     {\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}

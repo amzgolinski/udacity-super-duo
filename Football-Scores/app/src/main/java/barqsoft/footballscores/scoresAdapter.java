@@ -58,13 +58,14 @@ public class ScoresAdapter extends CursorAdapter {
         cursor.getString(MainScreenFragment.INDEX_COLUMN_DATE));
 
     // match result
-    String scores = Utilities.getScores(
+    String scores = Utilities.formatScores(
         cursor.getInt(MainScreenFragment.INDEX_COLUMN_HOME_GOALS),
         cursor.getInt(MainScreenFragment.INDEX_COLUMN_AWAY_GOALS)
     );
     mHolder.score.setText(scores);
 
     /*
+
     // home crest
     int crest = Utilities.getTeamCrestByTeamName(
         cursor.getString(MainScreenFragment.COLUMN_HOME_CREST));
@@ -102,10 +103,11 @@ public class ScoresAdapter extends CursorAdapter {
 
       matchDay.setText(
           Utilities.getMatchDay(
+              context,
               cursor.getInt(MainScreenFragment.INDEX_COLUMN_MATCH_DAY),
               leagueID));
       TextView league = (TextView) v.findViewById(R.id.league_textview);
-      league.setText(Utilities.getLeague(leagueID));
+      league.setText(Utilities.getLeague(context,leagueID));
       Button share_button = (Button) v.findViewById(R.id.share_button);
       share_button.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -122,7 +124,6 @@ public class ScoresAdapter extends CursorAdapter {
     } else {
       container.removeAllViews();
     }
-
   }
 
   public Intent createShareForecastIntent(String ShareText) {

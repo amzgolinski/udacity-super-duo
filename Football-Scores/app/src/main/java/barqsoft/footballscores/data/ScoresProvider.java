@@ -9,9 +9,6 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
-import barqsoft.footballscores.data.ScoresContract;
-import barqsoft.footballscores.data.ScoresDBHelper;
-
 
 public class ScoresProvider extends ContentProvider {
 
@@ -30,7 +27,7 @@ public class ScoresProvider extends ContentProvider {
     ScoresContract.ScoresTable.COLUMN_LEAGUE + " = ?";
 
   private static final String SCORES_BY_DATE =
-    ScoresContract.ScoresTable.COLUMN_DATE + " LIKE ? ";
+    ScoresContract.ScoresTable.COLUMN_DATE + " LIKE ?";
 
   private static final String SCORES_BY_ID =
     ScoresContract.ScoresTable.COLUMN_MATCH_ID + " = ?";
@@ -40,8 +37,19 @@ public class ScoresProvider extends ContentProvider {
     final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
     final String authority = ScoresContract.CONTENT_AUTHORITY;
     matcher.addURI(authority, ScoresContract.PATH_SCORES, MATCHES);
-    matcher.addURI(authority, "league", MATCHES_WITH_LEAGUE);
-    matcher.addURI(authority, "id", MATCHES_WITH_ID);
+
+    matcher.addURI(
+        authority,
+        ScoresContract.PATH_SCORES + "/league",
+        MATCHES_WITH_LEAGUE
+    );
+
+    matcher.addURI(
+        authority,
+        ScoresContract.PATH_SCORES + "/id",
+        MATCHES_WITH_ID
+    );
+
     matcher.addURI(
         authority,
         ScoresContract.PATH_SCORES + "/date",
@@ -49,22 +57,6 @@ public class ScoresProvider extends ContentProvider {
     );
     return matcher;
   }
-
-  /*
-  private int matchURI(Uri uri) {
-    String link = uri.toString();
-    if (link.contentEquals(ScoresContract.BASE_CONTENT_URI.toString())) {
-        return MATCHES;
-      } else if (link.contentEquals(ScoresContract.ScoresTable.buildScoreWithDate().toString())) {
-        return MATCHES_WITH_DATE;
-      } else if (link.contentEquals(ScoresContract.ScoresTable.buildScoreWithId().toString())) {
-        return MATCHES_WITH_ID;
-      } else if (link.contentEquals(ScoresContract.ScoresTable.buildScoreWithLeague().toString())) {
-        return MATCHES_WITH_LEAGUE;
-      }
-    return -1;
-  }
-  */
 
   @Override
   public boolean onCreate() {
@@ -143,7 +135,7 @@ public class ScoresProvider extends ContentProvider {
         );
         break;
       default:
-        throw new UnsupportedOperationException("Unknown Uri " + uri);
+        throw new UnsupportedOperationException("Unknown Uri: " + uri);
     }
     retCursor.setNotificationUri(getContext().getContentResolver(), uri);
     return retCursor;
@@ -182,7 +174,7 @@ public class ScoresProvider extends ContentProvider {
           db.endTransaction();
         }
         getContext().getContentResolver().notifyChange(uri, null);
-        Log.d(LOG_TAG, "Inserted " + returnCount + " matches");
+        Log.d(LOG_TAG, "Inserted data for " + returnCount + " matches");
         return returnCount;
       default:
         return super.bulkInsert(uri, values);

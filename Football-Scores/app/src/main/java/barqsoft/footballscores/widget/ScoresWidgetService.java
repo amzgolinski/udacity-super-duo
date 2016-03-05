@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import barqsoft.footballscores.MainScreenFragment;
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.Utilities;
 import barqsoft.footballscores.data.ScoresContract;
@@ -53,10 +52,9 @@ public class ScoresWidgetService extends RemoteViewsService {
       RemoteViewsService.RemoteViewsFactory {
 
     private Cursor mCursor;
-    private Context mContext;
 
     public ScoresRemoteViewsFactory(Context context, Intent intent) {
-      mContext = context;
+      // empty
     }
 
     public void onCreate() {
@@ -88,8 +86,10 @@ public class ScoresWidgetService extends RemoteViewsService {
           new RemoteViews(getPackageName(), R.layout.widget_item);
 
       // league
-      String league =
-          Utilities.getLeague(mCursor.getInt(INDEX_COLUMN_LEAGUE));
+      String league = Utilities.getLeague(
+          getApplicationContext(),
+          mCursor.getInt(INDEX_COLUMN_LEAGUE)
+      );
       views.setTextViewText(R.id.scores_widget_league, league);
 
       // home team
@@ -101,11 +101,10 @@ public class ScoresWidgetService extends RemoteViewsService {
       views.setTextViewText(R.id.scores_widget_away_team, awayTeam);
 
       // scoreline
-      String scoreline =
-          Utilities.getScores(
-              mCursor.getInt(INDEX_COLUMN_HOME_GOALS),
-              mCursor.getInt(INDEX_COLUMN_AWAY_GOALS)
-          );
+      String scoreline = Utilities.formatScores(
+          mCursor.getInt(INDEX_COLUMN_HOME_GOALS),
+          mCursor.getInt(INDEX_COLUMN_AWAY_GOALS)
+      );
 
       views.setTextViewText(R.id.scores_widget_score, scoreline);
 
