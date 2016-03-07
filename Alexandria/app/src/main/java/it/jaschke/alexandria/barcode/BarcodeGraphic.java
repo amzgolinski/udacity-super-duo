@@ -53,8 +53,8 @@ public class BarcodeGraphic extends GraphicOverlay.Graphic  {
   }
 
   /**
-   * Updates the barcode instance from the detection of the most recent frame.  Invalidates the
-   * relevant portions of the overlay to trigger a redraw.
+   * Updates the barcode instance from the detection of the most recent frame.
+   * Invalidates the relevant portions of the overlay to trigger a redraw.
    */
   void updateItem(Barcode barcode) {
     mBarcode = barcode;
@@ -62,7 +62,8 @@ public class BarcodeGraphic extends GraphicOverlay.Graphic  {
   }
 
   /**
-   * Draws the barcode annotations for position, size, and raw value on the supplied canvas.
+   * Draws the barcode annotations for position, size, and raw value on the
+   * supplied canvas.
    */
   @Override
   public void draw(Canvas canvas) {
@@ -79,7 +80,8 @@ public class BarcodeGraphic extends GraphicOverlay.Graphic  {
     rect.bottom = translateY(rect.bottom);
     canvas.drawRect(rect, mRectPaint);
 
-    // Draws a label at the bottom of the barcode indicate the barcode value that was detected.
+    // Draws a label at the bottom of the barcode indicate the barcode value
+    // that was detected.
     canvas.drawText(barcode.rawValue, rect.left, rect.bottom, mTextPaint);
   }
 

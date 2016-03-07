@@ -40,9 +40,16 @@
 
   <!-- Date format strings -->
   <string name="date_format_yyyy_MM_dd" translatable="false">yyyy-MM-dd</string>
+  <string name="date_format_json" translatable="false">
+    yyyy-MM-dd\'T\'HH:mm:ss\'Z\'
+  </string>
+  <string name="date_format_final" translatable="false">
+    yyyy-MM-dd:HH:mm
+  </string>
   <string name="date_format_day" translatable="false">EEEE</string>
+  <string name="fixtures_element" translatable="false">fixtures</string>
 
-  <string name="match_day">Match: %1$s</string>
+  <string name="match_day">Match day: %1$s</string>
 
   <!-- Champs League match day strings -->
   <string name="champs_league_group_stages">
@@ -52,7 +59,6 @@
   <string name="champs_league_quarterfinal">QuarterFinal</string>
   <string name="champs_league_semifinal">SemiFinal</string>
   <string name="champs_league_final">Final</string>
-
 
   <!-- League Names -->
   <string name="league_name_bundesliga" translatable="false">
@@ -65,6 +71,10 @@
 
   <string name="league_name_eredivisie" translatable="false">
     Eredivisie
+  </string>
+
+  <string name="league_name_ligue1" translatable="false">
+    Ligue 1
   </string>
 
   <string name="league_name_premier_league" translatable="false">
@@ -115,6 +125,7 @@
   <string name="home_team_crest">Home team crest.</string>
   <string name="away_team_crest">Away team crest.</string>
 
+  <string name="dummy_match_time" translatable="false">19:45</string>
 
   <string name="dummy_data" translatable="false">
     {\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}

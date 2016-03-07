@@ -43,7 +43,6 @@ public class DbHelper extends SQLiteOpenHelper {
       AlexandriaContract.BookEntry.TABLE_NAME + " (" +
       AlexandriaContract.BookEntry._ID + "))";
 
-
     Log.d("sql-statments", SQL_CREATE_BOOK_TABLE);
     Log.d("sql-statments", SQL_CREATE_AUTHOR_TABLE);
     Log.d("sql-statments", SQL_CREATE_CATEGORY_TABLE);

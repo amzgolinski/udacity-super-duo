@@ -28,12 +28,14 @@ public class MainActivity extends ActionBarActivity
 
   private static final String LOG_TAG = MainActivity.class.getSimpleName();
   /**
-   * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+   * Fragment managing the behaviors, interactions and presentation of the
+   * navigation drawer.
    */
   private NavigationDrawerFragment navigationDrawerFragment;
 
   /**
-   * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+   * Used to store the last screen title. For use in
+   * {@link #restoreActionBar()}.
    */
   private CharSequence title;
   public static boolean IS_TABLET = false;
@@ -64,9 +66,11 @@ public class MainActivity extends ActionBarActivity
       setContentView(R.layout.activity_main);
     }
 
-    messageReceiver = new MessageReciever();
+    messageReceiver = new MessageReceiver();
     IntentFilter filter = new IntentFilter(MESSAGE_EVENT);
-    LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, filter);
+    LocalBroadcastManager
+        .getInstance(this)
+        .registerReceiver(messageReceiver, filter);
 
     navigationDrawerFragment = (NavigationDrawerFragment)
       getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -112,7 +116,7 @@ public class MainActivity extends ActionBarActivity
     }
     getSupportFragmentManager().beginTransaction()
       .replace(id, fragment)
-      .addToBackStack("Book Detail")
+      .addToBackStack(getString(R.string.book_detail))
       .commit();
 
   }
@@ -169,7 +173,7 @@ public class MainActivity extends ActionBarActivity
     title = getString(titleId);
   }
 
-  private class MessageReciever extends BroadcastReceiver {
+  private class MessageReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
       if (intent.getStringExtra(MESSAGE_KEY) != null) {
@@ -182,12 +186,11 @@ public class MainActivity extends ActionBarActivity
   }
 
   private boolean isTablet() {
-    return (getApplicationContext().getResources().getConfiguration().screenLayout
+    return (
+        getApplicationContext().getResources().getConfiguration().screenLayout
       & Configuration.SCREENLAYOUT_SIZE_MASK)
       >= Configuration.SCREENLAYOUT_SIZE_LARGE;
   }
-
-
 
 
 }

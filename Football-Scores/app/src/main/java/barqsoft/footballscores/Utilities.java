@@ -2,64 +2,46 @@ package barqsoft.footballscores;
 
 import android.content.Context;
 
+import barqsoft.footballscores.model.League;
+
 public class Utilities {
 
   public static final int MILLISECONDS_IN_DAY = 86400000;
-
-  public interface Leagues {
-
-    int BUNDESLIGA1 = 394;
-    int BUNDESLIGA2 = 395;
-    int LIGUE1 = 396;
-    int LIGUE2 = 397;
-    int PREMIER_LEAGUE = 398;
-    int PRIMERA_DIVISION = 399;
-    int SEGUNDA_DIVISION = 400;
-    int SERIE_A = 401;
-    int PRIMERA_LIGA = 402;
-    int BUNDESLIGA3 = 403;
-    int EREDIVISIE = 404;
-    int CHAMPS_LEAGUE = 405;
-  }
+  public static final String EMPTY_STRING = "";
 
   public static long getDateInMillis(int offset) {
     return (System.currentTimeMillis() + ((offset - 2) * MILLISECONDS_IN_DAY));
   }
 
-  public static String getLeague(Context context, int leagueNum) {
+  public static int getLeague(int leagueNum) {
 
-    int leagueString;
-    switch (leagueNum) {
+    int leagueString = -1;
 
-      case Leagues.SERIE_A:
-        leagueString = R.string.league_name_seria_a;
-        break;
-      case Leagues.PREMIER_LEAGUE:
-        leagueString = R.string.league_name_premier_league;
-        break;
-      case Leagues.CHAMPS_LEAGUE:
-        leagueString = R.string.league_name_champs_league;
-        break;
-      case Leagues.PRIMERA_DIVISION:
-        leagueString = R.string.league_name_primera_division;
-        break;
-      case Leagues.BUNDESLIGA1:
-        leagueString = R.string.league_name_bundesliga;
-        break;
-      case Leagues.EREDIVISIE:
-        leagueString = R.string.league_name_eredivisie;
-        break;
-      default:
-        leagueString = R.string.league_not_listed;
+    if (leagueNum == League.BUNDESLIGA1.getId()) {
+      leagueString = R.string.league_name_bundesliga;
+
+    } else if (leagueNum == League.CHAMPS_LEAGUE.getId()) {
+      leagueString = R.string.league_name_champs_league;
+    } else if (leagueNum == League.EREDIVISIE.getId()) {
+      leagueString = R.string.league_name_eredivisie;
+    } else if (leagueNum == League.LIGUE1.getId()) {
+      leagueString = R.string.league_name_ligue1;
+    } else if (leagueNum == League.PREMIER_LEAGUE.getId()) {
+      leagueString = R.string.league_name_premier_league;
+    } else if (leagueNum == League.PRIMERA_DIVISION.getId()) {
+      leagueString = R.string.league_name_primera_division;
+    } else if (leagueNum == League.SERIE_A.getId()) {
+      leagueString = R.string.league_name_seria_a;
     }
-    return context.getString(leagueString);
+
+    return leagueString;
   }
 
   public static String getMatchDay(Context context, int matchDay,
-                                   int leagueNum) {
+                                   int leagueID) {
      String matchDayString;
 
-    if (leagueNum == Leagues.CHAMPS_LEAGUE) {
+    if (leagueID == League.CHAMPS_LEAGUE.getId()) {
       int matchdayResource;
       if (matchDay <= 6) {
         matchdayResource = R.string.champs_league_group_stages;
@@ -74,7 +56,8 @@ public class Utilities {
       }
       matchDayString = context.getString(matchdayResource);
     } else {
-      matchDayString =  "Matchday : " + String.valueOf(matchDay);
+      matchDayString =
+          context.getString(R.string.match_day, String.valueOf(matchDay));
     }
     return matchDayString;
   }
@@ -116,4 +99,19 @@ public class Utilities {
     }
     return toReturn;
   }
+
+  public static boolean isTrackedLeague(int leagueID) {
+    return (
+
+        leagueID == League.BUNDESLIGA1.getId() ||
+        leagueID == League.PREMIER_LEAGUE.getId() ||
+        leagueID == League.CHAMPS_LEAGUE.getId() ||
+        leagueID == League.EREDIVISIE.getId() ||
+        leagueID == League.PRIMERA_DIVISION.getId() ||
+        leagueID == League.LIGUE1.getId() ||
+        leagueID == League.SERIE_A.getId()
+    );
+
+  }
+
 }

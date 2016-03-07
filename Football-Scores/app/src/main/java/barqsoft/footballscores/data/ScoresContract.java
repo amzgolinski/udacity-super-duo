@@ -1,6 +1,7 @@
 package barqsoft.footballscores.data;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -44,12 +45,19 @@ public class ScoresContract {
       return CONTENT_URI.buildUpon().appendPath("league").build();
     }
 
-    public static Uri buildScoreWithId() {
-      return CONTENT_URI.buildUpon().appendPath("id").build();
+    public static Uri buildScoreWithMatchId(long matchID) {
+      return CONTENT_URI.buildUpon()
+          .appendQueryParameter(COLUMN_MATCH_ID, Long.toString(matchID))
+          .build();
+    }
+
+    public static Uri buildScoreUri(long id) {
+      return ContentUris.withAppendedId(CONTENT_URI, id);
     }
 
     public static Uri buildScoreWithDate() {
-      return CONTENT_URI.buildUpon().appendPath("date").build();
+      return CONTENT_URI.buildUpon()
+          .appendPath(COLUMN_DATE).build();
     }
   }
 

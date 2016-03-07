@@ -44,16 +44,22 @@ public class BookListAdapter extends CursorAdapter {
     );
     new DownloadImage(viewHolder.bookCover).execute(imgUrl);
 
-    String bookTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
+    String bookTitle = cursor.getString(
+        cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE)
+    );
     viewHolder.bookTitle.setText(bookTitle);
 
-    String bookSubTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
+    String bookSubTitle = cursor.getString(
+        cursor.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE)
+    );
     viewHolder.bookSubTitle.setText(bookSubTitle);
   }
 
   @Override
   public View newView(Context context, Cursor cursor, ViewGroup parent) {
-    View view = LayoutInflater.from(context).inflate(R.layout.book_list_item, parent, false);
+    View view = LayoutInflater
+        .from(context)
+        .inflate(R.layout.book_list_item, parent, false);
 
     ViewHolder viewHolder = new ViewHolder(view);
     view.setTag(viewHolder);

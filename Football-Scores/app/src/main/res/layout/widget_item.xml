@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/widget_score_item"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/widget_item_margin"
+              android:padding="@dimen/widget_padding"
               android:orientation="vertical">
 
   <TextView
@@ -17,52 +19,51 @@
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="40dp"
-      android:layout_gravity="center"
-      android:gravity="center"
-      android:layout_marginTop="10dp"
+      android:layout_height="wrap_content"
       android:orientation="horizontal">
 
     <TextView
         android:id="@+id/scores_widget_home_team"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/widget_text_primary"
-        tools:text="Tottenham Hotspurs" />
+        android:textSize="@dimen/team_name_size"
+        tools:text="Stocke City FC"/>
 
     <TextView
         android:id="@+id/scores_widget_score"
+        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/widget_text_primary"
         tools:text="6 - 1" />
 
-
     <TextView
         android:id="@+id/scores_widget_away_team"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/widget_text_primary"
-        tools:text="Manchester United" />
+        android:textSize="@dimen/team_name_size"
+        tools:text="Chelsea FC" />
 
   </LinearLayout>
 
   <TextView
-      android:id="@+id/scores_widget_matchday"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:textSize="16sp"
-      android:textColor="@color/widget_text_secondary"
-      tools:text="Match day: 2" />
+        android:id="@+id/scores_widget_matchday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/widget_scores_matchday_text"
+        android:textColor="@color/widget_text_secondary"
+        tools:text="Match day: 2" />
+
 
 </LinearLayout>

@@ -1,8 +1,10 @@
 package barqsoft.footballscores;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -22,12 +24,13 @@ public class MainScreenFragment extends Fragment
   implements LoaderManager.LoaderCallbacks<Cursor> {
 
   public static final String LOG_TAG = MainScreenFragment.class.getSimpleName();
+  public static final String POSITION = "barqsoft.footballscores.position";
 
   // Constants
   public static final int SCORES_LOADER = 0;
 
   public static final String SORT_ORDER =
-      "ORDER BY  " + ScoresContract.ScoresTable.COLUMN_LEAGUE + " ASC";
+      ScoresContract.ScoresTable.COLUMN_LEAGUE + " ASC";
 
   public static final String[] SCORES_COLUMNS = {
       ScoresContract.ScoresTable._ID,
@@ -56,6 +59,8 @@ public class MainScreenFragment extends Fragment
   // Member variables
   public ScoresAdapter mAdapter;
   private String[] mFragmentDate = new String[1];
+  private ListView mListView;
+  private int mPosition = ListView.INVALID_POSITION;
   private int mLastSelectedItem = -1;
 
   public MainScreenFragment() {
@@ -79,14 +84,21 @@ public class MainScreenFragment extends Fragment
     Log.d(LOG_TAG, "onCreateView");
     View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-    ListView scoreList = (ListView) rootView.findViewById(R.id.scores_list);
+    mListView = (ListView) rootView.findViewById(R.id.scores_list);
+
+    Intent test = getActivity().getIntent();
+    Bundle extras = test.getExtras();
+    if (extras != null) {
+      int value = extras.getInt(POSITION, ListView.INVALID_POSITION);
+      mPosition = value;
+    }
 
     mAdapter = new ScoresAdapter(getActivity(), null, 0);
-    scoreList.setAdapter(mAdapter);
+    mListView.setAdapter(mAdapter);
     getLoaderManager().initLoader(SCORES_LOADER, null, this);
     mAdapter.mDetailMatchID = MainActivity.mSelectedMatchID;
 
-    scoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position,
                               long id) {
@@ -123,6 +135,12 @@ public class MainScreenFragment extends Fragment
       cursor.moveToNext();
     }
     mAdapter.swapCursor(cursor);
+
+    if (mPosition != ListView.INVALID_POSITION) {
+      Log.d(LOG_TAG, "Position is " + mPosition);
+      mListView.setSelection(mPosition);
+      mPosition = ListView.INVALID_POSITION;
+    }
   }
 
   @Override

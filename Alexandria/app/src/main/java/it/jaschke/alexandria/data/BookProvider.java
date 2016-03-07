@@ -43,7 +43,6 @@ public class BookProvider extends ContentProvider {
         " USING (" + AlexandriaContract.BookEntry._ID + ")");
   }
 
-
   private static UriMatcher buildUriMatcher() {
 
     final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);

@@ -135,7 +135,7 @@ public class AddBook extends Fragment implements
 
     Context context = getActivity();
     Intent intent = new Intent(context, BarcodeCaptureActivity.class);
-    //TODO: right now these are hard-coded, but they probably should be controls
+    //TODO: right now these are hard-coded, but maybe they should be controls?
     intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
     intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
     startActivityForResult(intent, BARCODE_CAPTURE);
@@ -238,11 +238,13 @@ public class AddBook extends Fragment implements
   }
 
   @Override
-  public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
+  public void onSharedPreferenceChanged(SharedPreferences preferences,
+                                        String key) {
     Log.d(LOG_TAG, "onSharedPreferenceChanged");
 
     if (key.equals(getString(R.string.server_status_key))) {
-      @BookService.ServerStatus int status = Utility.getServerStatus(getActivity());
+      @BookService.ServerStatus int status =
+          Utility.getServerStatus(getActivity());
       Log.d(LOG_TAG, Integer.toString(status));
       if (status != BookService.SERVER_STATUS_OK &&
         status != BookService.SERVER_STATUS_RESET) {

@@ -93,7 +93,6 @@ public class ScoresProvider extends ContentProvider {
     Cursor retCursor;
 
     int match = mUriMatcher.match(uri);
-    Log.d(LOG_TAG, uri.toString());
 
     switch (match) {
       case MATCHES:
@@ -150,7 +149,6 @@ public class ScoresProvider extends ContentProvider {
   public int bulkInsert(Uri uri, ContentValues[] values) {
     SQLiteDatabase db = mOpenHelper.getWritableDatabase();
     //db.delete(DatabaseContract.SCORES_TABLE,null,null);
-    //Log.v(FetchScoreTask.LOG_TAG,String.valueOf(muriMatcher.match(uri)));
 
     int match = mUriMatcher.match(uri);
 

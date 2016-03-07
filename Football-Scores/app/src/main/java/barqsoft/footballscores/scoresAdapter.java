@@ -46,16 +46,24 @@ public class ScoresAdapter extends CursorAdapter {
         cursor.getDouble(MainScreenFragment.INDEX_COLUMN_MATCH_ID);
 
     // home team
-    mHolder.homeName.setText(
-        cursor.getString(MainScreenFragment.INDEX_COLUMN_HOME));
+    String homeTeam = cursor.getString(MainScreenFragment.INDEX_COLUMN_HOME);
+    mHolder.homeName.setText(homeTeam);
+
+    // home crest
+    int crest = Utilities.getTeamCrestByTeamName(context, homeTeam);
+    mHolder.homeCrest.setImageResource(crest);
 
     // away team
-    mHolder.awayName.setText(
-        cursor.getString(MainScreenFragment.INDEX_COLUMN_AWAY));
+    String awayTeam = cursor.getString(MainScreenFragment.INDEX_COLUMN_AWAY);
+    mHolder.awayName.setText(awayTeam);
 
-    // match date
-    mHolder.date.setText(
-        cursor.getString(MainScreenFragment.INDEX_COLUMN_DATE));
+    int leagueID = cursor.getInt(MainScreenFragment.INDEX_COLUMN_LEAGUE);
+    String leagueName = context.getString(Utilities.getLeague(leagueID));
+    mHolder.league.setText(leagueName);
+
+    // away crest
+    crest = Utilities.getTeamCrestByTeamName(context, awayTeam);
+    mHolder.awayCrest.setImageResource(crest);
 
     // match result
     String scores = Utilities.formatScores(
@@ -63,19 +71,12 @@ public class ScoresAdapter extends CursorAdapter {
         cursor.getInt(MainScreenFragment.INDEX_COLUMN_AWAY_GOALS)
     );
     mHolder.score.setText(scores);
-
-    /*
-
-    // home crest
-    int crest = Utilities.getTeamCrestByTeamName(
-        cursor.getString(MainScreenFragment.COLUMN_HOME_CREST));
-    mHolder.homeCrest.setImageResource(crest);
-
-    // away crest
-    crest = Utilities.getTeamCrestByTeamName(
-        cursor.getString(MainScreenFragment.COLUMN_AWAY_CREST));
-    mHolder.awayCrest.setImageResource(crest);
-    */
+    mHolder.matchday.setText(
+        Utilities.getMatchDay(
+            context,
+            cursor.getInt(MainScreenFragment.INDEX_COLUMN_MATCH_DAY),
+            leagueID)
+    );
 
     LayoutInflater vi = (LayoutInflater) context
         .getApplicationContext()
@@ -87,7 +88,6 @@ public class ScoresAdapter extends CursorAdapter {
         (ViewGroup) view.findViewById(R.id.details_fragment_container);
 
     if (mHolder.matchID == mDetailMatchID) {
-      //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");
 
       container.addView(
           v,
@@ -97,17 +97,12 @@ public class ScoresAdapter extends CursorAdapter {
               ViewGroup.LayoutParams.MATCH_PARENT)
       );
 
-      TextView matchDay = (TextView) v.findViewById(R.id.matchday_textview);
+      TextView date = (TextView) v.findViewById(R.id.date);
+      date.setText(cursor.getString(MainScreenFragment.INDEX_COLUMN_DATE));
 
-      int leagueID = cursor.getInt(MainScreenFragment.INDEX_COLUMN_LEAGUE);
+      TextView time = (TextView) v.findViewById(R.id.time);
+      time.setText(cursor.getString(MainScreenFragment.INDEX_COLUMN_TIME));
 
-      matchDay.setText(
-          Utilities.getMatchDay(
-              context,
-              cursor.getInt(MainScreenFragment.INDEX_COLUMN_MATCH_DAY),
-              leagueID));
-      TextView league = (TextView) v.findViewById(R.id.league_textview);
-      league.setText(Utilities.getLeague(context,leagueID));
       Button share_button = (Button) v.findViewById(R.id.share_button);
       share_button.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -117,8 +112,7 @@ public class ScoresAdapter extends CursorAdapter {
             createShareForecastIntent(
               mHolder.homeName.getText() + " " +
               mHolder.score.getText() + " " +
-              mHolder.awayName.getText() + " ")
-          );
+              mHolder.awayName.getText() + " "));
         }
       });
     } else {

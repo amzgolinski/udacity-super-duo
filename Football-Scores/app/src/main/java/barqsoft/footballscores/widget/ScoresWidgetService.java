@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import barqsoft.footballscores.MainScreenFragment;
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.Utilities;
 import barqsoft.footballscores.data.ScoresContract;
@@ -34,8 +36,8 @@ public class ScoresWidgetService extends RemoteViewsService {
   };
 
   // these indices must match the projection
-  static final int INDEX_MATCH_ID = 0;
-  static final int INDEX_MATCH_DAY = 1;
+  static final int INDEX_COLUMN_MATCH_ID = 0;
+  static final int INDEX_COLUMN_MATCH_DAY = 1;
   static final int INDEX_COLUMN_LEAGUE = 2;
   static final int INDEX_COLUMN_HOME = 3;
   static final int INDEX_COLUMN_HOME_GOALS = 4;
@@ -86,11 +88,9 @@ public class ScoresWidgetService extends RemoteViewsService {
           new RemoteViews(getPackageName(), R.layout.widget_item);
 
       // league
-      String league = Utilities.getLeague(
-          getApplicationContext(),
-          mCursor.getInt(INDEX_COLUMN_LEAGUE)
-      );
-      views.setTextViewText(R.id.scores_widget_league, league);
+      int leagueID = Utilities.getLeague(mCursor.getInt(INDEX_COLUMN_LEAGUE));
+      String leagueName = getApplicationContext().getString(leagueID);
+      views.setTextViewText(R.id.scores_widget_league, leagueName);
 
       // home team
       String homeTeam = mCursor.getString(INDEX_COLUMN_HOME);
@@ -110,8 +110,16 @@ public class ScoresWidgetService extends RemoteViewsService {
 
       // matchday
       String matchDay =
-          getString(R.string.match_day, mCursor.getString(INDEX_MATCH_DAY));
+          getString(R.string.match_day, mCursor.getString(INDEX_COLUMN_MATCH_DAY));
       views.setTextViewText(R.id.scores_widget_matchday, matchDay);
+
+      final Intent fillInIntent = new Intent();
+      Uri scoreUri = ScoresContract.ScoresTable.buildScoreWithMatchId(mCursor.getLong(INDEX_COLUMN_MATCH_ID));
+      fillInIntent.setData(scoreUri);
+      Bundle extras = new Bundle();
+      extras.putInt(MainScreenFragment.POSITION, position);
+      fillInIntent.putExtras(extras);
+      views.setOnClickFillInIntent(R.id.widget_score_item, fillInIntent);
 
       return views;
     }
@@ -128,7 +136,7 @@ public class ScoresWidgetService extends RemoteViewsService {
 
     public long getItemId(int position) {
       if (mCursor.moveToPosition(position))
-        return mCursor.getLong(INDEX_MATCH_ID);
+        return mCursor.getLong(INDEX_COLUMN_MATCH_ID);
       return position;
     }
 
@@ -151,13 +159,12 @@ public class ScoresWidgetService extends RemoteViewsService {
       SimpleDateFormat formatter = new SimpleDateFormat(pattern);
       Date today = new Date();
       String output = formatter.format(today);
-
       mCursor = getContentResolver().query(
           scoresWithDateUri,
           SCORES_COLUMNS,
           null,
           new String[]{output},
-          null);
+          ScoresContract.ScoresTable.COLUMN_LEAGUE + " ASC");
 
       Binder.restoreCallingIdentity(identityToken);
 

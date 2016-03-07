@@ -20,7 +20,8 @@ import it.jaschke.alexandria.api.Callback;
 import it.jaschke.alexandria.data.AlexandriaContract;
 
 
-public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListOfBooks extends Fragment
+    implements LoaderManager.LoaderCallbacks<Cursor> {
 
   private BookListAdapter bookListAdapter;
   private ListView bookList;
@@ -38,7 +39,8 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
 
     Cursor cursor = getActivity().getContentResolver().query(
       AlexandriaContract.BookEntry.CONTENT_URI,
@@ -50,7 +52,8 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
 
 
     bookListAdapter = new BookListAdapter(getActivity(), cursor, 0);
-    View rootView = inflater.inflate(R.layout.fragment_list_of_books, container, false);
+    View rootView =
+        inflater.inflate(R.layout.fragment_list_of_books, container, false);
     searchText = (EditText) rootView.findViewById(R.id.searchText);
     rootView.findViewById(R.id.searchButton).setOnClickListener(
       new View.OnClickListener() {
@@ -67,11 +70,14 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
     bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
       @Override
-      public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+      public void onItemClick(AdapterView<?> adapterView, View view,
+                              int position, long l) {
         Cursor cursor = bookListAdapter.getCursor();
         if (cursor != null && cursor.moveToPosition(position)) {
           ((Callback) getActivity())
-            .onItemSelected(cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry._ID)));
+            .onItemSelected(
+                cursor.getString(
+                    cursor.getColumnIndex(AlexandriaContract.BookEntry._ID)));
         }
       }
     });

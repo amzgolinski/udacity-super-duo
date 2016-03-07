@@ -41,9 +41,9 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 /**
- * Activity for the multi-tracker app.  This app detects barcodes and displays the value with the
- * rear facing camera. During detection overlay graphics are drawn to indicate the position,
- * size, and ID of each barcode.
+ * Activity for the multi-tracker app.  This app detects barcodes and displays
+ * the value with the rear facing camera. During detection overlay graphics are
+ * drawn to indicate the position, size, and ID of each barcode.
  */
 public final class BarcodeCaptureActivity extends AppCompatActivity {
   private static final String LOG_TAG = BarcodeCaptureActivity.class.getSimpleName();
@@ -76,7 +76,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     setContentView(R.layout.barcode_capture);
 
     mPreview = (CameraSourcePreview) findViewById(R.id.preview);
-    mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
+    mGraphicOverlay =
+        (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
 
     // read parameters from the intent used to launch the activity.
     boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
@@ -84,7 +85,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
     // Check for the camera permission before accessing the camera.  If the
     // permission is not granted yet, request permission.
-    int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+    int rc =
+        ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
     if (rc == PackageManager.PERMISSION_GRANTED) {
       createCameraSource(autoFocus, useFlash);
     } else {
@@ -142,53 +144,61 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
   }
 
   /**
-   * Creates and starts the camera.  Note that this uses a higher resolution in comparison
-   * to other detection examples to enable the barcode detector to detect small barcodes
-   * at long distances.
+   * Creates and starts the camera.  Note that this uses a higher resolution in
+   * comparison to other detection examples to enable the barcode detector to
+   * detect small barcodes at long distances.
    * <p/>
-   * Suppressing InlinedApi since there is a check that the minimum version is met before using
-   * the constant.
+   * Suppressing InlinedApi since there is a check that the minimum version is
+   * met before using the constant.
    */
   @SuppressLint("InlinedApi")
   private void createCameraSource(boolean autoFocus, boolean useFlash) {
     Context context = getApplicationContext();
 
-    // A barcode detector is created to track barcodes.  An associated multi-processor instance
-    // is set to receive the barcode detection results, track the barcodes, and maintain
-    // graphics for each barcode on screen.  The factory is used by the multi-processor to
-    // create a separate tracker instance for each barcode.
-    BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
-    BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay);
+    // A barcode detector is created to track barcodes.  An associated
+    // multi-processor instance is set to receive the barcode detection results,
+    // track the barcodes, and maintain graphics for each barcode on screen.
+    // The factory is used by the multi-processor to create a separate tracker
+    // instance for each barcode.
+    BarcodeDetector barcodeDetector =
+        new BarcodeDetector.Builder(context).build();
+    BarcodeTrackerFactory barcodeFactory =
+        new BarcodeTrackerFactory(mGraphicOverlay);
     barcodeDetector.setProcessor(
       new MultiProcessor.Builder<>(barcodeFactory).build());
 
     if (!barcodeDetector.isOperational()) {
-      // Note: The first time that an app using the barcode or face API is installed on a
-      // device, GMS will download a native libraries to the device in order to do detection.
-      // Usually this completes before the app is run for the first time.  But if that
-      // download has not yet completed, then the above call will not detect any barcodes
-      // and/or faces.
+      // Note: The first time that an app using the barcode or face API is
+      // installed on a device, GMS will download a native libraries to the
+      // device in order to do detection. Usually this completes before the app
+      // is run for the first time.  But if that download has not yet completed,
+      // then the above call will not detect any barcodes and/or faces.
       //
-      // isOperational() can be used to check if the required native libraries are currently
-      // available.  The detectors will automatically become operational once the library
-      // downloads complete on device.
+      // isOperational() can be used to check if the required native libraries
+      // are currently available.  The detectors will automatically become
+      // operational once the library downloads complete on device.
       Log.w(LOG_TAG, "Detector dependencies are not yet available.");
 
-      // Check for low storage.  If there is low storage, the native library will not be
-      // downloaded, so detection will not become operational.
-      IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
+      // Check for low storage.  If there is low storage, the native library
+      // will not be downloaded, so detection will not become operational.
+      IntentFilter lowstorageFilter =
+          new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
       boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
 
       if (hasLowStorage) {
-        Toast.makeText(this, R.string.low_storage_error, Toast.LENGTH_LONG).show();
+        Toast.makeText(
+            this,
+            R.string.low_storage_error,
+            Toast.LENGTH_LONG).show();
         Log.w(LOG_TAG, getString(R.string.low_storage_error));
       }
     }
 
-    // Creates and starts the camera.  Note that this uses a higher resolution in comparison
-    // to other detection examples to enable the barcode detector to detect small barcodes
-    // at long distances.
-    CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
+    // Creates and starts the camera.  Note that this uses a higher resolution
+    // in comparison to other detection examples to enable the barcode detector
+    // to detect small barcodes at long distances.
+    CameraSource.Builder builder =
+        new CameraSource.Builder(getApplicationContext(), barcodeDetector)
       .setFacing(CameraSource.CAMERA_FACING_BACK)
       .setRequestedPreviewSize(1900, 1024)
       .setRequestedFps(15.0f);
@@ -225,8 +235,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
   }
 
   /**
-   * Releases the resources associated with the camera source, the associated detectors, and the
-   * rest of the processing pipeline.
+   * Releases the resources associated with the camera source, the associated
+   * detectors, and the rest of the processing pipeline.
    */
   @Override
   protected void onDestroy() {
@@ -240,16 +250,19 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
    * Callback for the result from requesting permissions. This method
    * is invoked for every call on {@link #requestPermissions(String[], int)}.
    * <p>
-   * <strong>Note:</strong> It is possible that the permissions request interaction
-   * with the user is interrupted. In this case you will receive empty permissions
-   * and results arrays which should be treated as a cancellation.
+   * <strong>Note:</strong> It is possible that the permissions request
+   * interaction with the user is interrupted. In this case you will receive
+   * empty permissions and results arrays which should be treated as a
+   * cancellation.
    * </p>
    *
-   * @param requestCode  The request code passed in {@link #requestPermissions(String[], int)}.
+   * @param requestCode  The request code passed in
+   *                     {@link #requestPermissions(String[], int)}.
    * @param permissions  The requested permissions. Never null.
    * @param grantResults The grant results for the corresponding permissions
-   *                     which is either {@link PackageManager#PERMISSION_GRANTED}
-   *                     or {@link PackageManager#PERMISSION_DENIED}. Never null.
+   *                     which is either
+   *                     {@link PackageManager#PERMISSION_GRANTED} or
+   *                     {@link PackageManager#PERMISSION_DENIED}. Never null.
    * @see #requestPermissions(String[], int)
    */
   @Override
@@ -262,7 +275,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
       return;
     }
 
-    if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    if (grantResults.length != 0 &&
+        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
       Log.d(LOG_TAG, "Camera permission granted - initialize the camera source");
       // we have permission, so create the camerasource
       boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
@@ -288,17 +302,20 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
   }
 
   /**
-   * Starts or restarts the camera source, if it exists.  If the camera source doesn't exist yet
-   * (e.g., because onResume was called before the camera source was created), this will be called
-   * again when the camera source is created.
+   * Starts or restarts the camera source, if it exists.  If the camera source
+   * doesn't exist yet (e.g., because onResume was called before the camera
+   * source was created), this will be called again when the camera source is
+   * created.
    */
   private void startCameraSource() throws SecurityException {
     // check that the device has play services available.
-    int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
-      getApplicationContext());
+    int code = GoogleApiAvailability
+        .getInstance()
+        .isGooglePlayServicesAvailable(getApplicationContext());
     if (code != ConnectionResult.SUCCESS) {
-      Dialog dlg =
-        GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
+      Dialog dlg = GoogleApiAvailability
+          .getInstance()
+          .getErrorDialog(this, code, RC_HANDLE_GMS);
       dlg.show();
     }
 
@@ -342,7 +359,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     return barcode != null;
   }
 
-  private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
+  private class CaptureGestureListener extends
+      GestureDetector.SimpleOnGestureListener {
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
@@ -351,7 +369,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     }
   }
 
-  private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
+  private class ScaleListener implements
+      ScaleGestureDetector.OnScaleGestureListener {
 
     /**
      * Responds to scaling events for a gesture in progress.

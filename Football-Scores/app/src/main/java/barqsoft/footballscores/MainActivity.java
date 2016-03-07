@@ -31,10 +31,14 @@ public class MainActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
+      Log.d(LOG_TAG, "NULL");
       mMyMain = new PagerFragment();
       getSupportFragmentManager().beginTransaction()
         .add(R.id.container, mMyMain)
         .commit();
+    } else {
+      Log.d(LOG_TAG, "NOT NULL");
+      Log.d(LOG_TAG, savedInstanceState.toString());
     }
   }
 

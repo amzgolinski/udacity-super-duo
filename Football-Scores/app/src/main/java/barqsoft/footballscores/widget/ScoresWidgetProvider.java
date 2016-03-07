@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -68,17 +69,26 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
           new RemoteViews(context.getPackageName(), R.layout.widget_scores);
 
       // Create an Intent to launch MainActivity
-      Intent intent = new Intent(context, MainActivity.class);
+      Intent mainActivity = new Intent(context, MainActivity.class);
 
       PendingIntent pendingIntent =
-          PendingIntent.getActivity(context, 0, intent, 0);
-
+          PendingIntent.getActivity(context, 0, mainActivity, 0);
       views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
       views.setRemoteAdapter(
           R.id.football_scores,
           new Intent(context, ScoresWidgetService.class)
       );
+
+      Intent test = new Intent(context, MainActivity.class);
+      PendingIntent clickPendingIntentTemplate =
+          TaskStackBuilder.create(context)
+              .addNextIntentWithParentStack(test)
+              .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+      views.setPendingIntentTemplate(
+          R.id.football_scores,
+          clickPendingIntentTemplate);
 
       views.setEmptyView(R.id.football_scores, R.id.empty_view);
 
