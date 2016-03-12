@@ -64,8 +64,6 @@ public class AddBook extends Fragment implements
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-    Log.d(LOG_TAG, "onActivityResult");
-
     if (requestCode == BARCODE_CAPTURE) {
       if (resultCode == CommonStatusCodes.SUCCESS) {
         if (data != null) {
@@ -83,7 +81,6 @@ public class AddBook extends Fragment implements
 
   @Override
   public void onAttach(Activity activity) {
-    Log.d(LOG_TAG, "onAttach");
     super.onAttach(activity);
     activity.setTitle(R.string.scan);
   }
@@ -91,7 +88,6 @@ public class AddBook extends Fragment implements
   @Override
   public android.support.v4.content.Loader<Cursor> onCreateLoader(int id,
                                                                   Bundle args) {
-    Log.d(LOG_TAG, "onCreateLoader");
     if (mEan.getText().length() == 0) {
       return null;
     }
@@ -112,14 +108,12 @@ public class AddBook extends Fragment implements
   public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
 
-    Log.d(LOG_TAG, "onCreateView");
-
     mRrootView = inflater.inflate(R.layout.fragment_add_book, container, false);
     ButterKnife.bind(this, mRrootView);
 
     if (savedInstanceState != null) {
       mEan.setText(savedInstanceState.getString(EAN_CONTENT));
-      mEan.setHint("");
+      mEan.setHint(Utility.EMPTY_STRING);
     }
 
     return mRrootView;
@@ -127,7 +121,7 @@ public class AddBook extends Fragment implements
 
   @OnClick(R.id.save_button)
   public void saveBook() {
-    mEan.setText("");
+    mEan.setText(Utility.EMPTY_STRING);
   }
 
   @OnClick(R.id.scan_button)
@@ -135,7 +129,7 @@ public class AddBook extends Fragment implements
 
     Context context = getActivity();
     Intent intent = new Intent(context, BarcodeCaptureActivity.class);
-    //TODO: right now these are hard-coded, but maybe they should be controls?
+    //TODO: right now these are hard-coded, but maybe they should be controls.
     intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
     intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
     startActivityForResult(intent, BARCODE_CAPTURE);
@@ -147,12 +141,11 @@ public class AddBook extends Fragment implements
     bookIntent.putExtra(BookService.EAN, mEan.getText().toString());
     bookIntent.setAction(BookService.DELETE_BOOK);
     getActivity().startService(bookIntent);
-    mEan.setText("");
+    mEan.setText(Utility.EMPTY_STRING);
   }
 
   @OnTextChanged(R.id.ean)
   public void searchBook(CharSequence s) {
-    Log.d(LOG_TAG, "searchBook");
     String ean = s.toString();
     //catch isbn10 numbers
     ean = Utility.addEanPrefix(getContext(), ean);
@@ -168,7 +161,6 @@ public class AddBook extends Fragment implements
   public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader,
                              Cursor data) {
 
-    Log.d(LOG_TAG, "onLoadFinished");
     if (!data.moveToFirst()) {
       return;
     }
@@ -207,13 +199,11 @@ public class AddBook extends Fragment implements
 
   @Override
   public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-    Log.d(LOG_TAG, "onLoaderReset");
     // empty
   }
 
   @Override
   public void onPause() {
-    Log.d(LOG_TAG, "onPause");
     super.onPause();
     PreferenceManager.
       getDefaultSharedPreferences(getContext()).
@@ -222,7 +212,6 @@ public class AddBook extends Fragment implements
 
   @Override
   public void onResume() {
-    Log.d(LOG_TAG, "onResume");
     super.onResume();
     PreferenceManager.
       getDefaultSharedPreferences(getContext()).
@@ -240,12 +229,10 @@ public class AddBook extends Fragment implements
   @Override
   public void onSharedPreferenceChanged(SharedPreferences preferences,
                                         String key) {
-    Log.d(LOG_TAG, "onSharedPreferenceChanged");
 
     if (key.equals(getString(R.string.server_status_key))) {
       @BookService.ServerStatus int status =
           Utility.getServerStatus(getActivity());
-      Log.d(LOG_TAG, Integer.toString(status));
       if (status != BookService.SERVER_STATUS_OK &&
         status != BookService.SERVER_STATUS_RESET) {
         setErrorMessage(status);
@@ -255,7 +242,6 @@ public class AddBook extends Fragment implements
   }
 
   private void clearFields() {
-    Log.d(LOG_TAG, "clearFields");
     mBookTitle.setText(Utility.EMPTY_STRING);
     mBookSubTitle.setText(Utility.EMPTY_STRING);
     mAuthors.setText(Utility.EMPTY_STRING);
@@ -268,9 +254,9 @@ public class AddBook extends Fragment implements
   }
 
   private void downloadBook(String ean) {
-    Log.d(LOG_TAG, "downloadBook");
+
     // Once we have an ISBN, start a book intent
-    CharSequence msg = getString(R.string.downloading) + ": " + ean;
+    CharSequence msg = String.format(getString(R.string.downloading), ean);
     Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     Intent bookIntent = new Intent(getContext(), BookService.class);
     bookIntent.putExtra(BookService.EAN, ean);
@@ -280,7 +266,6 @@ public class AddBook extends Fragment implements
   }
 
   private void restartLoader() {
-    Log.d(LOG_TAG, "restartLoader");
     getLoaderManager().restartLoader(LOADER_ID, null, this);
   }
 

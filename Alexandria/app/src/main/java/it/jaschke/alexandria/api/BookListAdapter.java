@@ -1,6 +1,5 @@
 package it.jaschke.alexandria.api;
 
-
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
@@ -16,7 +15,6 @@ import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class BookListAdapter extends CursorAdapter {
-
 
   public static class ViewHolder {
     public final ImageView bookCover;

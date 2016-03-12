@@ -46,7 +46,8 @@ import java.io.IOException;
  * drawn to indicate the position, size, and ID of each barcode.
  */
 public final class BarcodeCaptureActivity extends AppCompatActivity {
-  private static final String LOG_TAG = BarcodeCaptureActivity.class.getSimpleName();
+  private static final String LOG_TAG =
+      BarcodeCaptureActivity.class.getSimpleName();
 
   // intent request code to handle updating play services if needed.
   private static final int RC_HANDLE_GMS = 9001;

@@ -22,14 +22,16 @@ public class Utility {
   }
 
   @SuppressWarnings("ResourceType")
-  public static @BookService.ServerStatus int getServerStatus(Context context) {
+  public static
+  @BookService.ServerStatus
+  int getServerStatus(Context context) {
 
     SharedPreferences prefs =
         PreferenceManager.getDefaultSharedPreferences(context);
 
     return prefs.getInt(
-      context.getString(R.string.server_status_key),
-      BookService.SERVER_STATUS_OK
+        context.getString(R.string.server_status_key),
+        BookService.SERVER_STATUS_OK
     );
   }
 
@@ -45,8 +47,8 @@ public class Utility {
         PreferenceManager.getDefaultSharedPreferences(context);
     SharedPreferences.Editor editor = sharedPref.edit();
     editor.putInt(
-      context.getString(R.string.server_status_key),
-      BookService.SERVER_STATUS_RESET);
+        context.getString(R.string.server_status_key),
+        BookService.SERVER_STATUS_RESET);
     editor.apply();
   }
 

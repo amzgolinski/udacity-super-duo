@@ -18,7 +18,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 public class CameraSourcePreview extends ViewGroup {
-  private static final String LOG_TAG = CameraSourcePreview.class.getSimpleName();
+  private static final String LOG_TAG =
+      CameraSourcePreview.class.getSimpleName();
 
   private Context mContext;
   private SurfaceView mSurfaceView;
@@ -40,7 +41,8 @@ public class CameraSourcePreview extends ViewGroup {
   }
 
   @RequiresPermission(Manifest.permission.CAMERA)
-  public void start(CameraSource cameraSource) throws IOException, SecurityException {
+  public void start(CameraSource cameraSource) throws IOException,
+      SecurityException {
     if (cameraSource == null) {
       stop();
     }
@@ -82,8 +84,8 @@ public class CameraSourcePreview extends ViewGroup {
         int min = Math.min(size.getWidth(), size.getHeight());
         int max = Math.max(size.getWidth(), size.getHeight());
         if (isPortraitMode()) {
-          // Swap width and height sizes when in portrait, since it will be rotated by
-          // 90 degrees
+          // Swap width and height sizes when in portrait, since it will be
+          // rotated by 90 degrees
           mOverlay.setCameraInfo(min, max, mCameraSource.getCameraFacing());
         } else {
           mOverlay.setCameraInfo(max, min, mCameraSource.getCameraFacing());
@@ -113,11 +115,14 @@ public class CameraSourcePreview extends ViewGroup {
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,
+                               int height) {
+      // empty
     }
   }
 
-  private static boolean cameraFocus(@NonNull CameraSource cameraSource, @NonNull String focusMode) {
+  private static boolean cameraFocus(@NonNull CameraSource cameraSource,
+                                     @NonNull String focusMode) {
     Field[] declaredFields = CameraSource.class.getDeclaredFields();
 
     for (Field field : declaredFields) {
@@ -145,7 +150,8 @@ public class CameraSourcePreview extends ViewGroup {
   }
 
   @Override
-  protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+  protected void onLayout(boolean changed, int left, int top, int right,
+                          int bottom) {
     int width = 420;
     int height = 240;
     if (mCameraSource != null) {
@@ -155,10 +161,9 @@ public class CameraSourcePreview extends ViewGroup {
         height = size.getHeight();
       }
     }
-    Log.d(LOG_TAG, "Width: " + width);
-    Log.d(LOG_TAG, "Height: " + height);
 
-    // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
+    // Swap width and height sizes when in portrait, since it will be rotated
+    // 90 degrees
     if (isPortraitMode()) {
       int tmp = width;
       //noinspection SuspiciousNameCombination

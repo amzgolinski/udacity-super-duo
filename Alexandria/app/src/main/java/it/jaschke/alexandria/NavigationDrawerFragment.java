@@ -23,7 +23,8 @@ import android.widget.ListView;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation
- * drawer. See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
+ * drawer. See the
+ * <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors
  * implemented here.
  */
@@ -166,10 +167,10 @@ public class NavigationDrawerFragment extends Fragment {
       mDrawerLayout,                    /* DrawerLayout object */
       R.drawable.ic_drawer,             /* nav drawer image to replace 'Up'
                                            caret */
-      R.string.navigation_drawer_open, /* "open drawer" description for
-                                    accessibility */
+      R.string.navigation_drawer_open,  /* "open drawer" description for
+                                           accessibility */
       R.string.navigation_drawer_close  /* "close drawer" description for
-                                    accessibility */
+                                           accessibility */
     ) {
       @Override
       public void onDrawerClosed(View drawerView) {

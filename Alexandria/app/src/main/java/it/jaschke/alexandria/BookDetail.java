@@ -22,7 +22,6 @@ import com.squareup.picasso.Picasso;
 
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
-import it.jaschke.alexandria.services.DownloadImage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

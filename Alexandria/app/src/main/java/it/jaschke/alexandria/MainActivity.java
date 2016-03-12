@@ -72,8 +72,9 @@ public class MainActivity extends ActionBarActivity
         .getInstance(this)
         .registerReceiver(messageReceiver, filter);
 
-    navigationDrawerFragment = (NavigationDrawerFragment)
-      getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+    navigationDrawerFragment =
+        (NavigationDrawerFragment) getSupportFragmentManager()
+            .findFragmentById(R.id.navigation_drawer);
     title = getTitle();
 
     // Set up the drawer.

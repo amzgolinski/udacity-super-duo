@@ -9,7 +9,8 @@ public class AlexandriaContract {
 
   public static final String CONTENT_AUTHORITY = "it.jaschke.alexandria";
 
-  public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+  public static final Uri BASE_CONTENT_URI =
+      Uri.parse("content://" + CONTENT_AUTHORITY);
 
   public static final String PATH_BOOKS = "books";
   public static final String PATH_AUTHORS = "authors";

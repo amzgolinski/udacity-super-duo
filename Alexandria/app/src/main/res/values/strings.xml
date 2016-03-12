@@ -16,7 +16,8 @@
 
   <string name="ok_button">Next</string>
   <string name="cancel_button">Cancel</string>
-  <string name="not_found">No Book found</string>
+  <string name="isbn_not_found">ISBN: %1$s not found</string>
+
   <string name="search">Search</string>
   <string name="delete">Delete Book</string>
   <string name="title_activity_settings">Settings</string>
@@ -26,7 +27,7 @@
 
   <string name="server_status_key" translatable="false">server_status</string>
 
-  <string name="downloading">Downloading</string>
+  <string name="downloading">Attempting to download: %1$s</string>
 
   <string name="book_detail">Book Detail</string>
 
@@ -59,8 +60,7 @@
   <!-- about text -->
   <string name="about_text">
     This application use a Google API to download book information. All titles,
-    cover images, and author details are provided by that API.  This version of
-    the app was built by amzgolinski for the Udacity Android Nanodegree program.
+    cover images, and author details are provided by that API.
   </string>
 
   <!-- EAN Specific String -->
@@ -68,9 +68,11 @@
 
   <!-- Mobile Vision API Sample Code Strings -->
   <string name="ok">OK</string>
+
   <string name="permission_camera_rationale">
     Access to the camera is needed for barcode detection
   </string>
+
   <string name="no_camera_permission">
     This application cannot run because it does not have the camera permission.
     The application will now exit.
