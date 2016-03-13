@@ -97,11 +97,15 @@ public class ScoresAdapter extends CursorAdapter {
               ViewGroup.LayoutParams.MATCH_PARENT)
       );
 
-      TextView date = (TextView) v.findViewById(R.id.date);
-      date.setText(cursor.getString(MainScreenFragment.INDEX_COLUMN_DATE));
+      TextView date = (TextView) v.findViewById(R.id.detail_date);
+      String sDate = cursor.getString(MainScreenFragment.INDEX_COLUMN_DATE);
+      Log.d(LOG_TAG, "Date: " + sDate);
+      date.setText(sDate);
 
-      TextView time = (TextView) v.findViewById(R.id.time);
-      time.setText(cursor.getString(MainScreenFragment.INDEX_COLUMN_TIME));
+      TextView time = (TextView) v.findViewById(R.id.detail_time);
+      String sTime = cursor.getString(MainScreenFragment.INDEX_COLUMN_TIME);
+      Log.d(LOG_TAG, "Time: " + sTime);
+      time.setText(sTime);
 
       Button share_button = (Button) v.findViewById(R.id.share_button);
       share_button.setOnClickListener(new View.OnClickListener() {

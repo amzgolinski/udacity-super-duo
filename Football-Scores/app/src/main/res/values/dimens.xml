@@ -21,7 +21,6 @@
   <dimen name="widget_divider_height">1dp</dimen>
   <dimen name="score_list_divider_height">15dp</dimen>
 
-
   <!-- 4 x 2 collections widget (formula: 70xn-30) -->
   <dimen name="widget_scores_default_width">250dp</dimen>
   <dimen name="widget_scores_default_height">180dp</dimen>

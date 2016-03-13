@@ -14,6 +14,7 @@
       android:layout_marginTop="5dp"
       android:gravity="center"
       android:textSize="@dimen/team_name_size"
+      android:textColor="@color/score_text_primary"
       android:text="Champions League"/>
 
   <LinearLayout
@@ -21,7 +22,6 @@
       android:layout_height="wrap_content"
       android:baselineAligned="false"
       android:orientation="horizontal"
-
       android:paddingTop="5dp">
 
     <LinearLayout
@@ -45,6 +45,7 @@
           android:gravity="center"
           android:padding="@dimen/team_name_padding"
           android:textSize="@dimen/team_name_size"
+          android:textColor="@color/score_text_primary"
           android:text="Manchester United"/>
     </LinearLayout>
 
@@ -60,8 +61,9 @@
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:gravity="center"
-          android:text="4 - 4"
-          android:textSize="@dimen/score_size"/>
+          android:textSize="@dimen/score_size"
+          android:textColor="@color/score_text_primary"
+          android:text="4 - 4"/>
 
     </LinearLayout>
 
@@ -85,8 +87,9 @@
           android:layout_gravity="center"
           android:gravity="center"
           android:padding="@dimen/team_name_padding"
-          android:text="Real Mardrid FC"
-          android:textSize="@dimen/team_name_size"/>
+          android:textSize="@dimen/team_name_size"
+          android:textColor="@color/score_text_primary"
+          android:text="Real Mardrid FC"/>
     </LinearLayout>
 
   </LinearLayout>
@@ -97,6 +100,7 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:textSize="@dimen/match_day_size"
+      android:textColor="@color/score_text_primary"
       android:paddingBottom="10dp"
       android:text="Match Day 12"/>
 

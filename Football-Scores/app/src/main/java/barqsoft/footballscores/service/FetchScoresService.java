@@ -44,7 +44,6 @@ public class FetchScoresService extends IntentService {
 
   @Override
   protected void onHandleIntent(Intent intent) {
-    Log.v(LOG_TAG, "onHandleIntent");
     getData("n3");
     getData("p3");
   }
@@ -69,8 +68,7 @@ public class FetchScoresService extends IntentService {
 
         if (!liveData) {
           matchID = matchID + Integer.toString(i);
-          long dateInMilis = Utilities.getDateInMillis(i);
-          date = getDummyMatchTime(dateInMilis);
+          date = getDummyMatchTime(Utilities.getDateInMillis(i));
         }
 
         time = date.substring(date.indexOf(":") + 1);
@@ -80,34 +78,27 @@ public class FetchScoresService extends IntentService {
         matchValues.put(ScoresContract.ScoresTable.COLUMN_MATCH_ID, matchID);
         matchValues.put(ScoresContract.ScoresTable.COLUMN_DATE, date);
         matchValues.put(ScoresContract.ScoresTable.COLUMN_TIME, time);
-
         matchValues.put(
             ScoresContract.ScoresTable.COLUMN_HOME,
             scores[i].getHomeTeamName()
         );
-
         matchValues.put(
             ScoresContract.ScoresTable.COLUMN_HOME_GOALS,
             scores[i].getHomeTeamGoals()
         );
-
         matchValues.put(
             ScoresContract.ScoresTable.COLUMN_AWAY,
             scores[i].getAwayTeamName()
         );
-
         matchValues.put(
             ScoresContract.ScoresTable.COLUMN_AWAY_GOALS,
             scores[i].getAwayTeamGoals()
         );
-
         matchValues.put(ScoresContract.ScoresTable.COLUMN_LEAGUE, leagueID);
-
         matchValues.put(
             ScoresContract.ScoresTable.COLUMN_MATCH_DAY,
             scores[i].getMatchday()
         );
-
         values.add(matchValues);
       }
     }
@@ -115,16 +106,16 @@ public class FetchScoresService extends IntentService {
   }
 
   private void getData(String timeFrame) {
-    Log.d(LOG_TAG, "getData");
 
     String scoresJSON;
     Score[] scores;
     try {
       //Base URL
       final String BASE_URL = "http://api.football-data.org/v1/fixtures";
-
       //Time Frame parameter to determine days
       final String QUERY_TIME_FRAME = "timeFrame";
+      // auth header
+      final String AUTH_HEADER = "X-Auth-Token";
 
       OkHttpClient client = new OkHttpClient();
 
@@ -137,7 +128,8 @@ public class FetchScoresService extends IntentService {
 
       Request request = new Request.Builder()
           .url(scoresURL)
-          .build();
+          .header(AUTH_HEADER, getString(R.string.api_key))
+              .build();
 
       Response response = client.newCall(request).execute();
       scoresJSON = response.body().string();
@@ -154,21 +146,22 @@ public class FetchScoresService extends IntentService {
       Log.e(LOG_TAG, "Communication error: " + ioException.getMessage());
 
     } catch (JSONException jsonException) {
-      Log.e(LOG_TAG, "Exception parsing JSON:" + jsonException.getMessage());
+      Log.e(LOG_TAG, "Exception parsing JSON: " + jsonException.getMessage());
 
     } catch (ParseException parseException) {
-      Log.e(LOG_TAG, "Parsing exception:" + parseException.getMessage());
+      Log.e(LOG_TAG, "Parsing exception: " + parseException.getMessage());
     }
   }
 
-  private String getDummyMatchTime(long dateInMilis) {
+  private String getDummyMatchTime(long dateInMillis) {
     StringBuilder matchDetails = new StringBuilder();
     final String MATCH_TIME = getString(R.string.dummy_match_time);
-    Date fragmentDate = new Date(dateInMilis);
+    Date fragmentDate = new Date(dateInMillis);
     SimpleDateFormat format =
         new SimpleDateFormat(getString(R.string.date_format_yyyy_MM_dd));
     String date = format.format(fragmentDate);
     matchDetails.append(date).append(":").append(MATCH_TIME);
+    Log.d(LOG_TAG, "Dummy match date: " + matchDetails.toString());
     return matchDetails.toString();
 
   }
@@ -207,6 +200,7 @@ public class FetchScoresService extends IntentService {
 
   private Score[] parseScoreJSON(String jsonData) {
 
+    Log.d(LOG_TAG, jsonData);
     Score[] scores;
     final String RESULTS = getString(R.string.fixtures_element);
     Gson gson = new Gson();

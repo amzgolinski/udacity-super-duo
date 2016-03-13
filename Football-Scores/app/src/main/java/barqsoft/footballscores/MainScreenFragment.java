@@ -1,10 +1,8 @@
 package barqsoft.footballscores;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -68,7 +66,6 @@ public class MainScreenFragment extends Fragment
   }
 
   private void updateScores() {
-    Log.d(LOG_TAG, "updateScores");
     Intent fetchScoresIntent =
       new Intent(getActivity(), FetchScoresService.class);
     getActivity().startService(fetchScoresIntent);
@@ -81,7 +78,7 @@ public class MainScreenFragment extends Fragment
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            final Bundle savedInstanceState) {
-    Log.d(LOG_TAG, "onCreateView");
+
     View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
     mListView = (ListView) rootView.findViewById(R.id.scores_list);
@@ -114,7 +111,7 @@ public class MainScreenFragment extends Fragment
 
   @Override
   public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-    Log.d(LOG_TAG, "onCreateLoader");
+
     return new CursorLoader(
         getActivity(),
         ScoresContract.ScoresTable.buildScoreWithDate(),
@@ -127,7 +124,7 @@ public class MainScreenFragment extends Fragment
 
   @Override
   public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-    Log.d(LOG_TAG, "onLoadFinished");
+
     int i = 0;
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
@@ -145,7 +142,6 @@ public class MainScreenFragment extends Fragment
 
   @Override
   public void onLoaderReset(Loader<Cursor> cursorLoader) {
-    Log.d(LOG_TAG, "onLoaderReset");
     mAdapter.swapCursor(null);
   }
 }

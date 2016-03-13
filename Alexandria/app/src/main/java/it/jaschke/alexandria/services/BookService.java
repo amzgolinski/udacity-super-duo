@@ -163,8 +163,7 @@ public class BookService extends IntentService {
         Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
         messageIntent.putExtra(
             MainActivity.MESSAGE_KEY,
-            String.format(
-                getResources().getString(R.string.isbn_not_found), ean));
+                getResources().getString(R.string.isbn_not_found, ean));
         LocalBroadcastManager.getInstance(
             getApplicationContext()).sendBroadcast(messageIntent);
       }

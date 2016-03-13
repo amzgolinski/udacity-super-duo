@@ -31,14 +31,10 @@ public class MainActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
-      Log.d(LOG_TAG, "NULL");
       mMyMain = new PagerFragment();
       getSupportFragmentManager().beginTransaction()
         .add(R.id.container, mMyMain)
         .commit();
-    } else {
-      Log.d(LOG_TAG, "NOT NULL");
-      Log.d(LOG_TAG, savedInstanceState.toString());
     }
   }
 
@@ -68,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
-    Log.v(LOG_TAG, "onSaveInstanceState");
+
     outState.putInt(CURRENT_PAGE, mMyMain.mPagerHandler.getCurrentItem());
     outState.putInt(SELECTED_MATCH, mSelectedMatchID);
     getSupportFragmentManager().putFragment(outState, PAGER_FRAGMENT, mMyMain);
@@ -77,7 +73,6 @@ public class MainActivity extends ActionBarActivity {
 
   @Override
   protected void onRestoreInstanceState(Bundle savedInstanceState) {
-    Log.v(LOG_TAG, "onRestoreInstanceState");
 
     mCurrentFragment = savedInstanceState.getInt(CURRENT_PAGE);
     mSelectedMatchID = savedInstanceState.getInt(SELECTED_MATCH);

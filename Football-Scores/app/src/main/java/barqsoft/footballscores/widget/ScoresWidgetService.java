@@ -46,7 +46,6 @@ public class ScoresWidgetService extends RemoteViewsService {
 
   @Override
   public RemoteViewsFactory onGetViewFactory(Intent intent) {
-    Log.d(LOG_TAG, "onGetViewFactory");
     return new ScoresRemoteViewsFactory(getApplicationContext(), intent);
   }
 
@@ -64,7 +63,6 @@ public class ScoresWidgetService extends RemoteViewsService {
     }
 
     public void onDestroy() {
-      Log.d(LOG_TAG, "onDestroy");
       if (mCursor != null) {
         mCursor.close();
         mCursor = null;
@@ -72,7 +70,6 @@ public class ScoresWidgetService extends RemoteViewsService {
     }
 
     public int getCount() {
-      Log.d(LOG_TAG, "getCount");
       return (mCursor == null ? 0 : mCursor.getCount());
     }
 
@@ -114,7 +111,10 @@ public class ScoresWidgetService extends RemoteViewsService {
       views.setTextViewText(R.id.scores_widget_matchday, matchDay);
 
       final Intent fillInIntent = new Intent();
-      Uri scoreUri = ScoresContract.ScoresTable.buildScoreWithMatchId(mCursor.getLong(INDEX_COLUMN_MATCH_ID));
+      Uri scoreUri = ScoresContract
+          .ScoresTable
+          .buildScoreWithMatchId(mCursor.getLong(INDEX_COLUMN_MATCH_ID));
+
       fillInIntent.setData(scoreUri);
       Bundle extras = new Bundle();
       extras.putInt(MainScreenFragment.POSITION, position);
@@ -125,12 +125,10 @@ public class ScoresWidgetService extends RemoteViewsService {
     }
 
     public RemoteViews getLoadingView() {
-      Log.d(LOG_TAG, "getLoadingView");
       return new RemoteViews(getPackageName(), R.layout.widget_item);
     }
 
     public int getViewTypeCount() {
-      Log.d(LOG_TAG, "getViewTypeCount");
       return 1;
     }
 
@@ -141,12 +139,10 @@ public class ScoresWidgetService extends RemoteViewsService {
     }
 
     public boolean hasStableIds() {
-      Log.d(LOG_TAG, "hasStableIds");
       return true;
     }
 
     public void onDataSetChanged() {
-      Log.d(LOG_TAG, "onDataSetChanged");
 
       if (mCursor != null) {
         mCursor.close();

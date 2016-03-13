@@ -256,7 +256,7 @@ public class AddBook extends Fragment implements
   private void downloadBook(String ean) {
 
     // Once we have an ISBN, start a book intent
-    CharSequence msg = String.format(getString(R.string.downloading), ean);
+    CharSequence msg = getString(R.string.downloading, ean);
     Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     Intent bookIntent = new Intent(getContext(), BookService.class);
     bookIntent.putExtra(BookService.EAN, ean);

@@ -21,25 +21,21 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
 
   @Override
   public void onDeleted(Context context, int[] appWidgetIds) {
-    Log.d(LOG_TAG, "onDeleted");
     super.onDeleted(context, appWidgetIds);
   }
 
   @Override
   public void onDisabled(Context context) {
-    Log.d(LOG_TAG, "onDisabled");
     super.onDisabled(context);
   }
 
   @Override
   public void onEnabled(Context context) {
-    Log.d(LOG_TAG, "onEnabled");
     super.onEnabled(context);
   }
 
   @Override
   public void onReceive(Context context, Intent intent) {
-    Log.d(LOG_TAG, "onReceive");
 
     super.onReceive(context, intent);
 
@@ -62,9 +58,7 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
   public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                        int[] appWidgetIds) {
 
-    Log.d(LOG_TAG, "onUpdate");
     for (int appWidgetId : appWidgetIds) {
-      Log.d(LOG_TAG, "AppWidgetId: " + appWidgetId);
       RemoteViews views =
           new RemoteViews(context.getPackageName(), R.layout.widget_scores);
 

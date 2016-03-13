@@ -22,14 +22,15 @@
     to students in the Udacity Android Nanodegree program.
     To report any bugs,or suggestions do not hesitate to send a mail to
     y.k.ibnelwalid@gmail.com.
-    During the off season, fake data will be added to the app.
+    During the off season, the app will use fake match data.
   </string>
 
   <string name="test_text">Test</string>
+
   <string name="widget_text">This is a widget probably.</string>
 
   <string name="api_key" translatable="false">
-    00c3a98588ae49988be05d371753fc6e
+    API_KEY
   </string>
 
   <string name="empty_view_text">
@@ -48,7 +49,6 @@
   </string>
   <string name="date_format_day" translatable="false">EEEE</string>
   <string name="fixtures_element" translatable="false">fixtures</string>
-
   <string name="match_day">Match day: %1$s</string>
 
   <!-- Champs League match day strings -->
@@ -128,7 +128,7 @@
   <string name="dummy_match_time" translatable="false">19:45</string>
 
   <string name="dummy_data" translatable="false">
-    {\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}
+    {\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/v1/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/v1/soccerseasons/405\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/v1/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/v1/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"HOME-2\",\"awayTeamName\":\"AWAY-2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/v1/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/v1/soccerseasons/405\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/v1/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/v1/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"HOME-1\",\"awayTeamName\":\"AWAY-1\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/v1/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/v1/soccerseasons/405\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/v1/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/v1/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"HOME\",\"awayTeamName\":\"AWAY\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/v1/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/v1/soccerseasons/405\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/v1/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/v1/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"HOME+1\",\"awayTeamName\":\"AWAY+1\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/v1/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/v1/soccerseasons/405\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/v1/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/v1/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"HOME+2\",\"awayTeamName\":\"AWAY+2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}
   </string>
 
 </resources>

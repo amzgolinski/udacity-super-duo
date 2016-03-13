@@ -1,10 +1,14 @@
 package barqsoft.footballscores;
 
 import android.content.Context;
+import android.util.Log;
+
 
 import barqsoft.footballscores.model.League;
 
 public class Utilities {
+
+  private static final String LOG_TAG = Utilities.class.getSimpleName();
 
   public static final int MILLISECONDS_IN_DAY = 86400000;
   public static final String EMPTY_STRING = "";
@@ -72,9 +76,6 @@ public class Utilities {
 
   public static int getTeamCrestByTeamName(Context context, String name) {
     int toReturn = R.drawable.no_icon;
-    if (name == null) {
-      toReturn = R.drawable.no_icon;
-    }
 
     if (name.equals(context.getString(R.string.team_name_arsenal))) {
       toReturn = R.drawable.arsenal;
@@ -102,7 +103,6 @@ public class Utilities {
 
   public static boolean isTrackedLeague(int leagueID) {
     return (
-
         leagueID == League.BUNDESLIGA1.getId() ||
         leagueID == League.PREMIER_LEAGUE.getId() ||
         leagueID == League.CHAMPS_LEAGUE.getId() ||
