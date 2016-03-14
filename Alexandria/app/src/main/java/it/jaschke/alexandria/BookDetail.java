@@ -164,10 +164,10 @@ public class BookDetail extends Fragment
         data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY)
     );
 
-    if (categories == null) {
-      mCategories.setText(R.string.no_categories_listed);
-    } else {
+    if (categories != null) {
       mCategories.setText(categories);
+    } else {
+      mCategories.setText(R.string.no_categories_listed);
     }
 
     if (mRootView.findViewById(R.id.right_container) != null) {
