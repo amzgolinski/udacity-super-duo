@@ -31,6 +31,9 @@
 
   <string name="book_detail">Book Detail</string>
 
+  <string name="no_author_listed">No author(s) listed.</string>
+  <string name="no_categories_listed">No categories listed.</string>
+
   <!-- error messages -->
   <string name="no_book_info">
     Cannot download book details.

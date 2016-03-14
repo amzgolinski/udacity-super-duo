@@ -193,5 +193,4 @@ public class MainActivity extends ActionBarActivity
       >= Configuration.SCREENLAYOUT_SIZE_LARGE;
   }
 
-
 }

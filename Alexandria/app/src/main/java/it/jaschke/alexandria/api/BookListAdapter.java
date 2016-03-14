@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.DownloadImage;
@@ -40,7 +42,15 @@ public class BookListAdapter extends CursorAdapter {
     String imgUrl = cursor.getString(
       cursor.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL)
     );
-    new DownloadImage(viewHolder.bookCover).execute(imgUrl);
+
+    if (imgUrl != null) {
+      Picasso.with(context)
+          .load(imgUrl)
+          .error(R.drawable.no_poster_available)
+          .into(viewHolder.bookCover);
+    } else {
+      viewHolder.bookCover.setImageResource(R.drawable.no_poster_available);
+    }
 
     String bookTitle = cursor.getString(
         cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE)

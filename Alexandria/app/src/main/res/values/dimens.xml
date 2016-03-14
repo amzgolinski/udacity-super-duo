@@ -6,6 +6,11 @@
   <dimen name="small_fontsize">12sp</dimen>
   <dimen name="padding_about">8dp</dimen>
 
+  <dimen name="book_cover_width_list">60dip</dimen>
+  <dimen name="book_cover_height_list">60dip</dimen>
+  <dimen name="book_cover_width_detail">120dip</dimen>
+  <dimen name="book_cover_height_detail">120dip</dimen>
+
   <!--
     Per the design guidelines, navigation drawers should be between 240dp
     and 320dp: https://developer.android.com/design/patterns/navigation-drawer.html

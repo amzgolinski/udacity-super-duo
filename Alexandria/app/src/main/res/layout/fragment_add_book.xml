@@ -80,34 +80,40 @@
         android:ellipsize="end"
         android:maxLines="3"/>
 
+
+    <ImageView
+        android:id="@+id/bookCover"
+        android:layout_width="@dimen/book_cover_width_list"
+        android:layout_height="@dimen/book_cover_height_list"
+        android:layout_alignLeft="@+id/eancontainer"
+        android:layout_alignStart="@+id/eancontainer"
+        android:layout_alignTop="@+id/authors"
+        android:src="@drawable/no_poster_available"
+        android:contentDescription="@string/book_cover"/>
+
     <TextView
         android:id="@+id/authors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/eancontainer"
-        android:layout_alignRight="@+id/eancontainer"
         android:layout_below="@+id/bookSubTitle"
+        android:layout_toRightOf="@+id/bookCover"
+        android:layout_toEndOf="@+id/bookCover"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:gravity="end"
         android:textSize="@dimen/small_fontsize"/>
-
-    <ImageView
-        android:id="@+id/bookCover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/eancontainer"
-        android:layout_alignStart="@+id/eancontainer"
-        android:layout_alignTop="@+id/authors"
-        android:contentDescription="@string/book_cover"/>
 
     <TextView
         android:id="@+id/categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/eancontainer"
-        android:layout_alignStart="@+id/eancontainer"
-        android:layout_below="@+id/bookCover"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/authors"
+        android:layout_toRightOf="@+id/bookCover"
+        android:layout_toEndOf="@+id/bookCover"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:textSize="@dimen/small_fontsize"/>
 
     <LinearLayout

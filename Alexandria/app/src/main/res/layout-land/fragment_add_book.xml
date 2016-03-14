@@ -78,14 +78,16 @@
 
     <ImageView
         android:id="@+id/bookCover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/book_cover_width_list"
+        android:layout_height="@dimen/book_cover_height_list"
         android:layout_alignLeft="@+id/bookSubTitle"
         android:layout_alignStart="@+id/bookSubTitle"
         android:layout_below="@+id/bookSubTitle"
         android:contentDescription="@string/book_cover"
         android:minHeight="20dip"
-        android:minWidth="20dip"/>
+        android:minWidth="20dip"
+        android:src="@drawable/no_poster_available"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/authors"
@@ -102,10 +104,12 @@
         android:id="@+id/categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bookCover"
-        android:layout_alignStart="@+id/bookCover"
-        android:layout_below="@+id/bookCover"
+        android:layout_toRightOf="@+id/bookCover"
+        android:layout_toEndOf="@+id/bookCover"
+        android:layout_below="@+id/authors"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
         android:textSize="@dimen/small_fontsize"/>
 
     <LinearLayout

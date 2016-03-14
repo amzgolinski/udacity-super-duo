@@ -10,6 +10,7 @@ public class Book {
   private String description;
   private Links imageLinks;
 
+
   static class Links {
     String smallThumbnail;
     String thumbnail;
@@ -17,26 +18,45 @@ public class Book {
 
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Title: " + title + "\n");
-    sb.append("Subtitle: " + subtitle + "\n");
-    sb.append("Description: " + description + "\n");
 
+    // title
+    sb.append("Title: ");
+    if (title != null ) sb.append(title);
+    sb.append("\n");
+
+    // subtitle
+    sb.append("Subtitle: ");
+    if (subtitle != null) sb.append(subtitle);
+    sb.append("\n");
+
+    // description
+    sb.append("Description: ");
+    if (description != null) sb.append(description);
+    sb.append("\n");
+
+    // authors
+    sb.append("Authors: ");
     if (authors != null) {
-      sb.append("Authors: ");
       for (String author : authors) {
         sb.append(author + " ");
       }
-      sb.append("\n");
     }
+    sb.append("\n");
+
+    // categories
+    sb.append("Categories: ");
     if (categories != null) {
-      sb.append("Categories: ");
       for (String cat : categories) {
         sb.append(cat + " ");
       }
     }
     sb.append("\n");
-    sb.append("Thumbnail: " + imageLinks.thumbnail + "\n");
-    return sb.toString();
+
+    // thumbnail
+    sb.append("Thumbnail: ");
+    if (imageLinks !=  null) sb.append(imageLinks.thumbnail);
+
+  return sb.toString();
   }
 
   public String getTitle() {
@@ -60,15 +80,19 @@ public class Book {
   }
 
   public String getThumbnail() {
-    return imageLinks.thumbnail;
+    String thumbnail = null;
+    if (imageLinks != null) {
+      thumbnail = imageLinks.thumbnail;
+    }
+    return thumbnail;
   }
 
   public boolean hasAuthors() {
-    return (authors.length > 0);
+    return (authors != null && authors.length > 0);
   }
 
   public boolean hasCategories() {
-    return (categories.length > 0);
+    return (categories != null && categories.length > 0);
   }
 
 }

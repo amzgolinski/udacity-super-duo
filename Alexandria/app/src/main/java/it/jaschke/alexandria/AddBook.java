@@ -129,7 +129,7 @@ public class AddBook extends Fragment implements
 
     Context context = getActivity();
     Intent intent = new Intent(context, BarcodeCaptureActivity.class);
-    //TODO: right now these are hard-coded, but maybe they should be controls.
+    //TODO: right now these are hard-coded, but they should be UI controls.
     intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
     intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
     startActivityForResult(intent, BARCODE_CAPTURE);
@@ -175,22 +175,37 @@ public class AddBook extends Fragment implements
 
     String authors = data.getString(
       data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-    String[] authorsArr = authors.split(",");
-    mAuthors.setLines(authorsArr.length);
-    mAuthors.setText(authors.replace(",", "\n"));
+    if (authors != null) {
+      String[] authorsArr = authors.split(",");
+      mAuthors.setLines(authorsArr.length);
+      mAuthors.setText(authors.replace(",", "\n"));
+    } else {
+      mAuthors.setText(R.string.no_author_listed);
+    }
 
     String imgUrl = data.getString(
       data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
 
-    Picasso.with(getContext())
-      .load(imgUrl)
-      .error(R.drawable.no_poster_available)
-      .into(mBookCover);
+    if (imgUrl != null) {
+
+      Picasso.with(getContext())
+          .load(imgUrl)
+          .error(R.drawable.no_poster_available)
+          .into(mBookCover);
+    } else {
+      mBookCover.setImageResource(R.drawable.no_poster_available);
+    }
     mBookCover.setVisibility(View.VISIBLE);
 
     String categories = data.getString(
         data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
-    mCategories.setText(categories);
+
+    if (categories != null) {
+      mCategories.setText(categories);
+    } else {
+      mCategories.setText(R.string.no_categories_listed);
+    }
+
 
     mSave.setVisibility(View.VISIBLE);
     mDelete.setVisibility(View.VISIBLE);

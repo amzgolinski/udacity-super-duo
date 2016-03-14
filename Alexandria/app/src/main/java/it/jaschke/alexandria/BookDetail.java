@@ -8,7 +8,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,10 +30,9 @@ public class BookDetail extends Fragment
 
   public static final String EAN_KEY = "EAN";
   private final int LOADER_ID = 10;
-  private View rootView;
-  private String ean;
-  private String bookTitle;
-  private ShareActionProvider shareActionProvider;
+  private View mRootView;
+  private String mEAN;
+  private ShareActionProvider mShareActionProvider;
 
   // Butterknife bindings
   @Bind(R.id.fullBookTitle) TextView mFullBookTitle;
@@ -59,7 +57,7 @@ public class BookDetail extends Fragment
                                                                   Bundle args) {
     return new CursorLoader(
       getActivity(),
-      AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(ean)),
+      AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(mEAN)),
       null,
       null,
       null,
@@ -72,7 +70,7 @@ public class BookDetail extends Fragment
     inflater.inflate(R.menu.book_detail, menu);
 
     MenuItem menuItem = menu.findItem(R.id.action_share);
-    shareActionProvider =
+    mShareActionProvider =
         (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
   }
 
@@ -82,24 +80,24 @@ public class BookDetail extends Fragment
 
     Bundle arguments = getArguments();
     if (arguments != null) {
-      ean = arguments.getString(BookDetail.EAN_KEY);
+      mEAN = arguments.getString(BookDetail.EAN_KEY);
       getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
-    rootView = inflater.inflate(R.layout.fragment_full_book, container, false);
-    ButterKnife.bind(this, rootView);
-    rootView.findViewById(R.id.delete_button).setOnClickListener(
+    mRootView = inflater.inflate(R.layout.fragment_full_book, container, false);
+    ButterKnife.bind(this, mRootView);
+    mRootView.findViewById(R.id.delete_button).setOnClickListener(
         new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent bookIntent = new Intent(getActivity(), BookService.class);
-        bookIntent.putExtra(BookService.EAN, ean);
+        bookIntent.putExtra(BookService.EAN, mEAN);
         bookIntent.setAction(BookService.DELETE_BOOK);
         getActivity().startService(bookIntent);
         getActivity().getSupportFragmentManager().popBackStack();
       }
     });
-    return rootView;
+    return mRootView;
   }
 
 
@@ -111,15 +109,18 @@ public class BookDetail extends Fragment
     }
 
     // book title
-    bookTitle =
+    String bookTitle =
         data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
     mFullBookTitle.setText(bookTitle);
 
     Intent shareIntent = new Intent(Intent.ACTION_SEND);
     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
     shareIntent.setType("text/plain");
-    shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + bookTitle);
-    shareActionProvider.setShareIntent(shareIntent);
+    shareIntent.putExtra(
+        Intent.EXTRA_TEXT,
+        getString(R.string.share_text) + bookTitle
+    );
+    setShareIntent(shareIntent);
 
     // book sub-title
     String bookSubTitle = data.getString(
@@ -137,28 +138,40 @@ public class BookDetail extends Fragment
     String authors = data.getString(
         data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR)
     );
-    String[] authorsArr = authors.split(",");
-    mAuthorsView.setLines(authorsArr.length);
-    mAuthorsView.setText(authors.replace(",", "\n"));
+    if (authors != null) {
+      String[] authorsArr = authors.split(",");
+      mAuthorsView.setLines(authorsArr.length);
+      mAuthorsView.setText(authors.replace(",", "\n"));
+    } else {
+      mAuthorsView.setText(R.string.no_author_listed);
+    }
 
     // book cover
     String imgUrl = data.getString(
-        data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL)
-    );
+        data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
 
-    Picasso.with(getContext())
-        .load(imgUrl)
-        .error(R.drawable.no_poster_available)
-        .into(mBookCover);
+    if (imgUrl != null) {
+      Picasso.with(getContext())
+          .load(imgUrl)
+          .error(R.drawable.no_poster_available)
+          .into(mBookCover);
+    } else {
+      mBookCover.setImageResource(R.drawable.no_poster_available);
+    }
     mBookCover.setVisibility(View.VISIBLE);
 
     String categories = data.getString(
         data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY)
     );
-    mCategories.setText(categories);
 
-    if (rootView.findViewById(R.id.right_container) != null) {
-      rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
+    if (categories == null) {
+      mCategories.setText(R.string.no_categories_listed);
+    } else {
+      mCategories.setText(categories);
+    }
+
+    if (mRootView.findViewById(R.id.right_container) != null) {
+      mRootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
     }
 
   }
@@ -172,8 +185,14 @@ public class BookDetail extends Fragment
   public void onPause() {
     super.onDestroyView();
     if (MainActivity.IS_TABLET &&
-        rootView.findViewById(R.id.right_container) == null) {
+        mRootView.findViewById(R.id.right_container) == null) {
       getActivity().getSupportFragmentManager().popBackStack();
+    }
+  }
+
+  private void setShareIntent(Intent shareIntent) {
+    if (mShareActionProvider != null) {
+      mShareActionProvider.setShareIntent(shareIntent);
     }
   }
 }
