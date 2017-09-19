@@ -13,14 +13,14 @@ import android.widget.TextView;
 
 public class ScoresAdapter extends CursorAdapter {
 
-  public static final String LOG_TAG = ScoresAdapter.class.getSimpleName();
+  private static final String LOG_TAG = ScoresAdapter.class.getSimpleName();
 
   private static final String FOOTBALL_SCORES_HASHTAG = "#Football_Scores";
 
   // Member variables
-  public double mDetailMatchID = 0;
+  double mDetailMatchID = 0;
 
-  public ScoresAdapter(Context context, Cursor cursor, int flags) {
+  ScoresAdapter(Context context, Cursor cursor, int flags) {
     super(context, cursor, flags);
   }
 
@@ -124,7 +124,7 @@ public class ScoresAdapter extends CursorAdapter {
     }
   }
 
-  public Intent createShareForecastIntent(String ShareText) {
+  private Intent createShareForecastIntent(String ShareText) {
     Intent shareIntent = new Intent(Intent.ACTION_SEND);
     shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
     shareIntent.setType("text/plain");
